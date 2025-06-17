@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор стилизованного текста</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -155,6 +156,9 @@
             white-space: pre-wrap;
             word-break: break-word;
             animation: glow 2s infinite alternate;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            padding: 20px;
         }
         
         @keyframes glow {
@@ -411,20 +415,21 @@
             letter-spacing: 1px;
         }
         
-        /* Новые стили для текста */
-        .bubble {
+        /* Обновленные стили для текста */
+        .bubble, .square {
             font-family: Arial, sans-serif;
             font-weight: bold;
-            color: #6a11cb;
             letter-spacing: 1px;
+            display: inline-block;
+        }
+        
+        .bubble {
+            color: #6a11cb;
             font-size: 1.3rem;
         }
         
         .square {
-            font-family: Arial, sans-serif;
-            font-weight: bold;
             color: #4a5568;
-            letter-spacing: 1px;
             font-size: 1.2rem;
         }
         
@@ -435,9 +440,10 @@
         }
         
         .script {
-            font-family: 'Brush Script MT', cursive;
+            font-family: 'Caveat', cursive;
             color: #38ef7d;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
+            font-weight: bold;
         }
         
         .old-english {
@@ -594,18 +600,18 @@
                         <div class="option" data-type="bubble">
                             <div class="option-title">Пузырьковый текст</div>
                             <div class="option-preview">
-                                <span class="bubble">🅛🅞🅡🅔🅜</span>
+                                <span class="bubble">🅟🅤🅩🅨🅡</span>
                             </div>
                         </div>
                         <div class="option" data-type="square">
                             <div class="option-title">Квадратный текст</div>
                             <div class="option-preview">
-                                <span class="square">🆃🅴🆇🆃</span>
+                                <span class="square">🅺🅰🆅🅰🅳</span>
                             </div>
                         </div>
                         <div class="option" data-type="script">
                             <div class="option-title">Рукописный</div>
-                            <div class="option-preview script">𝓣𝓮𝔁𝓽</div>
+                            <div class="option-preview script">Рукопись</div>
                         </div>
                         <div class="option" data-type="bold">
                             <div class="option-title">Жирный</div>
@@ -675,6 +681,7 @@
             
             /**
              * Обработчик выбора стиля текста
+             * Добавляет класс 'selected' к выбранной опции и снимает его с других
              */
             options.forEach(option => {
                 option.addEventListener('click', function() {
@@ -688,90 +695,62 @@
             options[0].classList.add('selected');
             
             /**
-             * Генерирует текст с выбранным эффектом
+             * Основная функция генерации стилизованного текста
              * @param {string} text - Исходный текст
              * @param {string} type - Тип стиля
              * @returns {string} Стилизованный текст
+             * 
+             * Определяет тип стиля и вызывает соответствующую функцию преобразования
              */
             function generateText(text, type) {
                 if (!text.trim()) return '';
                 
-                // Обработка Zalgo текста
-                if (type === 'zalgo') {
-                    return generateZalgoText(text);
+                // Определяем тип стиля и вызываем соответствующую функцию
+                switch(type) {
+                    case 'zalgo':
+                        return generateZalgoText(text);
+                    case 'invisible':
+                        return generateInvisibleText(text);
+                    case 'outline':
+                        return `<span class="outline-text">${text}</span>`;
+                    case 'smallCaps':
+                        return `<span class="small-caps">${text}</span>`;
+                    case 'bubble':
+                        return `<span class="bubble">${generateBubbleText(text)}</span>`;
+                    case 'square':
+                        return `<span class="square">${generateSquareText(text)}</span>`;
+                    case 'invisible-dots':
+                        return `<span class="invisible-dots">${generateInvisibleDotsText(text)}</span>`;
+                    case 'script':
+                        return `<span class="script">${text}</span>`; // Для русского просто применяем стиль
+                    case 'bold':
+                        return `<span class="bold-text">${text}</span>`;
+                    case 'italic':
+                        return `<span class="italic-text">${text}</span>`;
+                    case 'serif':
+                        return `<span class="serif-text">${text}</span>`;
+                    case 'sansSerif':
+                        return `<span class="sans-serif-text">${text}</span>`;
+                    case 'oldEnglish':
+                        return `<span class="old-english">${text}</span>`;
+                    case 'upsideDown':
+                        return `<span class="upside-down">${generateUpsideDownText(text)}</span>`;
+                    case 'superscript':
+                        return `<span class="superscript">${generateSuperscriptText(text)}</span>`;
+                    default:
+                        return applyBaseEffect(text, type);
                 }
-                
-                // Обработка невидимого текста
-                if (type === 'invisible') {
-                    return generateInvisibleText(text);
-                }
-                
-                // Обработка контурного текста
-                if (type === 'outline') {
-                    return `<span class="outline-text">${text}</span>`;
-                }
-                
-                // Обработка малых прописных
-                if (type === 'smallCaps') {
-                    return `<span class="small-caps">${text}</span>`;
-                }
-                
-                // Обработка пузырькового текста
-                if (type === 'bubble') {
-                    return `<span class="bubble">${generateBubbleText(text)}</span>`;
-                }
-                
-                // Обработка квадратного текста
-                if (type === 'square') {
-                    return `<span class="square">${generateSquareText(text)}</span>`;
-                }
-                
-                // Обработка текста с разделителями
-                if (type === 'invisible-dots') {
-                    return `<span class="invisible-dots">${generateInvisibleDotsText(text)}</span>`;
-                }
-                
-                // Обработка рукописного текста
-                if (type === 'script') {
-                    return `<span class="script">${generateScriptText(text)}</span>`;
-                }
-                
-                // Обработка жирного текста
-                if (type === 'bold') {
-                    return `<span class="bold-text">${text}</span>`;
-                }
-                
-                // Обработка курсива
-                if (type === 'italic') {
-                    return `<span class="italic-text">${text}</span>`;
-                }
-                
-                // Обработка шрифта с засечками
-                if (type === 'serif') {
-                    return `<span class="serif-text">${text}</span>`;
-                }
-                
-                // Обработка шрифта без засечек
-                if (type === 'sansSerif') {
-                    return `<span class="sans-serif-text">${text}</span>`;
-                }
-                
-                // Обработка староанглийского текста
-                if (type === 'oldEnglish') {
-                    return `<span class="old-english">${text}</span>`;
-                }
-                
-                // Обработка текста вверх ногами
-                if (type === 'upsideDown') {
-                    return `<span class="upside-down">${generateUpsideDownText(text)}</span>`;
-                }
-                
-                // Обработка надстрочного текста
-                if (type === 'superscript') {
-                    return `<span class="superscript">${generateSuperscriptText(text)}</span>`;
-                }
-                
-                // Базовые стили
+            }
+            
+            /**
+             * Применяет базовые эффекты к тексту (подчеркивание, зачеркивание и т.д.)
+             * @param {string} text - Исходный текст
+             * @param {string} type - Тип эффекта
+             * @returns {string} Текст с примененным эффектом
+             * 
+             * Использует Unicode комбинирующие символы для создания эффектов
+             */
+            function applyBaseEffect(text, type) {
                 const effects = {
                     strike: '\u0336',    // Combining Long Stroke Overlay
                     underline: '\u0332', // Combining Low Line
@@ -784,6 +763,7 @@
                 const effectChar = effects[type] || '';
                 let result = '';
                 
+                // Добавляем эффект к каждому символу
                 for (let i = 0; i < text.length; i++) {
                     result += text[i] + effectChar;
                 }
@@ -792,29 +772,43 @@
             }
             
             /**
-             * Генерирует пузырьковый текст
+             * Генерирует пузырьковый текст (🅛🅞🅡🅔🅜) с поддержкой русского языка
              * @param {string} text - Исходный текст
              * @returns {string} Пузырьковый текст
+             * 
+             * Использует специальные Unicode символы для создания эффекта
              */
             function generateBubbleText(text) {
+                // Карта преобразования русских букв в пузырьковые символы
                 const bubbleMap = {
+                    'А': '🅐', 'Б': '🅑', 'В': '🅑', 'Г': '🅖', 'Д': '🅓',
+                    'Е': '🅔', 'Ё': '🅔', 'Ж': '🅙', 'З': '🅩', 'И': '🅘',
+                    'Й': '🅘', 'К': '🅚', 'Л': '🅛', 'М': '🅜', 'Н': '🅝',
+                    'О': '🅞', 'П': '🅟', 'Р': '🅡', 'С': '🅒', 'Т': '🅣',
+                    'У': '🅤', 'Ф': '🅕', 'Х': '🅗', 'Ц': '🅒', 'Ч': '🅒',
+                    'Ш': '🅦', 'Щ': '🅦', 'Ъ': '🅠', 'Ы': '🅨', 'Ь': '🅑',
+                    'Э': '🅔', 'Ю': '🅤', 'Я': '🅐',
+                    'а': '🅐', 'б': '🅑', 'в': '🅑', 'г': '🅖', 'д': '🅓',
+                    'е': '🅔', 'ё': '🅔', 'ж': '🅙', 'з': '🅩', 'и': '🅘',
+                    'й': '🅘', 'к': '🅚', 'л': '🅛', 'м': '🅜', 'н': '🅝',
+                    'о': '🅞', 'п': '🅟', 'р': '🅡', 'с': '🅒', 'т': '🅣',
+                    'у': '🅤', 'ф': '🅕', 'х': '🅗', 'ц': '🅒', 'ч': '🅒',
+                    'ш': '🅦', 'щ': '🅦', 'ъ': '🅠', 'ы': '🅨', 'ь': '🅑',
+                    'э': '🅔', 'ю': '🅤', 'я': '🅐',
                     'A': '🅐', 'B': '🅑', 'C': '🅒', 'D': '🅓', 'E': '🅔',
                     'F': '🅕', 'G': '🅖', 'H': '🅗', 'I': '🅘', 'J': '🅙',
                     'K': '🅚', 'L': '🅛', 'M': '🅜', 'N': '🅝', 'O': '🅞',
                     'P': '🅟', 'Q': '🅠', 'R': '🅡', 'S': '🅢', 'T': '🅣',
                     'U': '🅤', 'V': '🅥', 'W': '🅦', 'X': '🅧', 'Y': '🅨', 'Z': '🅩',
-                    'a': '🅐', 'b': '🅑', 'c': '🅒', 'd': '🅓', 'e': '🅔',
-                    'f': '🅕', 'g': '🅖', 'h': '🅗', 'i': '🅘', 'j': '🅙',
-                    'k': '🅚', 'l': '🅛', 'm': '🅜', 'n': '🅝', 'o': '🅞',
-                    'p': '🅟', 'q': '🅠', 'r': '🅡', 's': '🅢', 't': '🅣',
-                    'u': '🅤', 'v': '🅥', 'w': '🅦', 'x': '🅧', 'y': '🅨', 'z': '🅩',
                     '0': '⓿', '1': '➊', '2': '➋', '3': '➌', '4': '➍', 
-                    '5': '➎', '6': '➏', '7': '➐', '8': '➑', '9': '➒'
+                    '5': '➎', '6': '➏', '7': '➐', '8': '➑', '9': '➒',
+                    ' ': ' ', ',': ',', '.': '.', '!': '!', '?': '?', '-': '-', ':': ':', ';': ';'
                 };
                 
                 let result = '';
                 for (let i = 0; i < text.length; i++) {
                     const char = text[i];
+                    // Если символ есть в карте преобразования, заменяем его
                     result += bubbleMap[char] || char;
                 }
                 
@@ -822,29 +816,43 @@
             }
             
             /**
-             * Генерирует квадратный текст
+             * Генерирует квадратный текст (🆃🅴🆇🆃) с поддержкой русского языка
              * @param {string} text - Исходный текст
              * @returns {string} Квадратный текст
+             * 
+             * Использует специальные Unicode символы для создания эффекта
              */
             function generateSquareText(text) {
+                // Карта преобразования русских букв в квадратные символы
                 const squareMap = {
+                    'А': '🅐', 'Б': '🅑', 'В': '🅑', 'Г': '🅖', 'Д': '🅓',
+                    'Е': '🅔', 'Ё': '🅔', 'Ж': '🅙', 'З': '🅩', 'И': '🅘',
+                    'Й': '🅘', 'К': '🅚', 'Л': '🅛', 'М': '🅜', 'Н': '🅝',
+                    'О': '🅞', 'П': '🅟', 'Р': '🅡', 'С': '🅒', 'Т': '🅣',
+                    'У': '🅤', 'Ф': '🅕', 'Х': '🅗', 'Ц': '🅒', 'Ч': '🅒',
+                    'Ш': '🅦', 'Щ': '🅦', 'Ъ': '🅠', 'Ы': '🅨', 'Ь': '🅑',
+                    'Э': '🅔', 'Ю': '🅤', 'Я': '🅐',
+                    'а': '🅐', 'б': '🅑', 'в': '🅑', 'г': '🅖', 'д': '🅓',
+                    'е': '🅔', 'ё': '🅔', 'ж': '🅙', 'з': '🅩', 'и': '🅘',
+                    'й': '🅘', 'к': '🅚', 'л': '🅛', 'м': '🅜', 'н': '🅝',
+                    'о': '🅞', 'п': '🅟', 'р': '🅡', 'с': '🅒', 'т': '🅣',
+                    'у': '🅤', 'ф': '🅕', 'х': '🅗', 'ц': '🅒', 'ч': '🅒',
+                    'ш': '🅦', 'щ': '🅦', 'ъ': '🅠', 'ы': '🅨', 'ь': '🅑',
+                    'э': '🅔', 'ю': '🅤', 'я': '🅐',
                     'A': '🄰', 'B': '🄱', 'C': '🄲', 'D': '🄳', 'E': '🄴',
                     'F': '🄵', 'G': '🄶', 'H': '🄷', 'I': '🄸', 'J': '🄹',
                     'K': '🄺', 'L': '🄻', 'M': '🄼', 'N': '🄽', 'O': '🄾',
                     'P': '🄿', 'Q': '🅀', 'R': '🅁', 'S': '🅂', 'T': '🅃',
                     'U': '🅄', 'V': '🅅', 'W': '🅆', 'X': '🅇', 'Y': '🅈', 'Z': '🅉',
-                    'a': '🄰', 'b': '🄱', 'c': '🄲', 'd': '🄳', 'e': '🄴',
-                    'f': '🄵', 'g': '🄶', 'h': '🄷', 'i': '🄸', 'j': '🄹',
-                    'k': '🄺', 'l': '🄻', 'm': '🄼', 'n': '🄽', 'o': '🄾',
-                    'p': '🄿', 'q': '🅀', 'r': '🅁', 's': '🅂', 't': '🅃',
-                    'u': '🅄', 'v': '🅅', 'w': '🅆', 'x': '🅇', 'y': '🅈', 'z': '🅉',
                     '0': '⓿', '1': '➊', '2': '➋', '3': '➌', '4': '➍', 
-                    '5': '➎', '6': '➏', '7': '➐', '8': '➑', '9': '➒'
+                    '5': '➎', '6': '➏', '7': '➐', '8': '➑', '9': '➒',
+                    ' ': ' ', ',': ',', '.': '.', '!': '!', '?': '?', '-': '-', ':': ':', ';': ';'
                 };
                 
                 let result = '';
                 for (let i = 0; i < text.length; i++) {
                     const char = text[i];
+                    // Если символ есть в карте преобразования, заменяем его
                     result += squareMap[char] || char;
                 }
                 
@@ -852,44 +860,19 @@
             }
             
             /**
-             * Генерирует текст с разделителями
+             * Генерирует текст с разделителями (f҉a҉n҉c҉y҉)
              * @param {string} text - Исходный текст
              * @returns {string} Текст с разделителями
+             * 
+             * Вставляет символ CYRILLIC MILLIONS SIGN (U+0489) между каждым символом
              */
             function generateInvisibleDotsText(text) {
-                const separator = '\u0489'; // ҉
+                const separator = '\u0489'; // CYRILLIC MILLIONS SIGN (҉)
                 let result = '';
                 
                 for (let i = 0; i < text.length; i++) {
+                    // Добавляем символ и разделитель
                     result += text[i] + separator;
-                }
-                
-                return result;
-            }
-            
-            /**
-             * Генерирует рукописный текст
-             * @param {string} text - Исходный текст
-             * @returns {string} Рукописный текст
-             */
-            function generateScriptText(text) {
-                const scriptMap = {
-                    'A': '𝓐', 'B': '𝓑', 'C': '𝓒', 'D': '𝓓', 'E': '𝓔',
-                    'F': '𝓕', 'G': '𝓖', 'H': '𝓗', 'I': '𝓘', 'J': '𝓙',
-                    'K': '𝓚', 'L': '𝓛', 'M': '𝓜', 'N': '𝓝', 'O': '𝓞',
-                    'P': '𝓟', 'Q': '𝓠', 'R': '𝓡', 'S': '𝓢', 'T': '𝓣',
-                    'U': '𝓤', 'V': '𝓥', 'W': '𝓦', 'X': '𝓧', 'Y': '𝓨', 'Z': '𝓩',
-                    'a': '𝓪', 'b': '𝓫', 'c': '𝓬', 'd': '𝓭', 'e': '𝓮',
-                    'f': '𝓯', 'g': '𝓰', 'h': '𝓱', 'i': '𝓲', 'j': '𝓳',
-                    'k': '𝓴', 'l': '𝓵', 'm': '𝓶', 'n': '𝓷', 'o': '𝓸',
-                    'p': '𝓹', 'q': '𝓺', 'r': '𝓻', 's': '𝓼', 't': '𝓽',
-                    'u': '𝓾', 'v': '𝓿', 'w': '𝔀', 'x': '𝔁', 'y': '𝔂', 'z': '𝔃'
-                };
-                
-                let result = '';
-                for (let i = 0; i < text.length; i++) {
-                    const char = text[i];
-                    result += scriptMap[char] || char;
                 }
                 
                 return result;
@@ -899,6 +882,8 @@
              * Генерирует Zalgo текст
              * @param {string} text - Исходный текст
              * @returns {string} Zalgo текст
+             * 
+             * Добавляет случайные комбинирующие диакритические знаки к каждому символу
              */
             function generateZalgoText(text) {
                 const zalgoChars = [
@@ -930,16 +915,14 @@
                 for (let i = 0; i < text.length; i++) {
                     result += text[i];
                     
-                    // Добавляем случайное количество символов Zalgo
+                    // Добавляем случайное количество символов Zalgo сверху
                     const topCount = Math.floor(Math.random() * 5) + 1;
-                    const bottomCount = Math.floor(Math.random() * 3) + 1;
-                    
-                    // Верхние символы
                     for (let j = 0; j < topCount; j++) {
                         result += zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
                     }
                     
-                    // Нижние символы
+                    // Добавляем случайное количество символов Zalgo снизу
+                    const bottomCount = Math.floor(Math.random() * 3) + 1;
                     for (let j = 0; j < bottomCount; j++) {
                         result += zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
                     }
@@ -952,6 +935,8 @@
              * Генерирует невидимый текст
              * @param {string} text - Исходный текст
              * @returns {string} Невидимый текст
+             * 
+             * Заменяет символы на невидимые Unicode-символы
              */
             function generateInvisibleText(text) {
                 const invisibleChars = ['\u200B', '\u200C', '\u200D', '\u2060', '\uFEFF'];
@@ -973,6 +958,8 @@
              * Генерирует текст вверх ногами
              * @param {string} text - Исходный текст
              * @returns {string} Перевернутый текст
+             * 
+             * Использует симметричные символы и разворачивает строку
              */
             function generateUpsideDownText(text) {
                 const charMap = {
@@ -991,8 +978,10 @@
                 };
                 
                 let result = '';
+                // Перебираем строку в обратном порядке
                 for (let i = text.length - 1; i >= 0; i--) {
                     const char = text[i];
+                    // Заменяем символ на перевернутый аналог если он есть
                     result += charMap[char] || char;
                 }
                 
@@ -1003,6 +992,8 @@
              * Генерирует надстрочный текст
              * @param {string} text - Исходный текст
              * @returns {string} Надстрочный текст
+             * 
+             * Заменяет символы на их надстрочные аналоги
              */
             function generateSuperscriptText(text) {
                 const superscriptMap = {
@@ -1021,6 +1012,7 @@
                 let result = '';
                 for (let i = 0; i < text.length; i++) {
                     const char = text[i];
+                    // Заменяем символ на надстрочный аналог если он есть
                     result += superscriptMap[char] || char;
                 }
                 
