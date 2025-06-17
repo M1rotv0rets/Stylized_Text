@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор стилизованного текста</title>
-    <link rel="icon" href="Icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -237,6 +236,7 @@
         .option:nth-child(10) { animation-delay: 1.9s; }
         .option:nth-child(11) { animation-delay: 2.0s; }
         .option:nth-child(12) { animation-delay: 2.1s; }
+        .option:nth-child(13) { animation-delay: 2.2s; }
         
         .option:hover {
             transform: translateY(-5px);
@@ -411,22 +411,33 @@
             letter-spacing: 1px;
         }
         
-        /* Измененные стили для пузырькового текста */
+        /* Новые стили для текста */
         .bubble {
-            font-family: 'Comic Sans MS', cursive;
+            font-family: Arial, sans-serif;
             font-weight: bold;
             color: #6a11cb;
             letter-spacing: 1px;
             font-size: 1.3rem;
         }
         
-        /* Измененные стили для квадратного текста */
         .square {
-            font-family: 'Courier New', monospace;
+            font-family: Arial, sans-serif;
             font-weight: bold;
             color: #4a5568;
             letter-spacing: 1px;
             font-size: 1.2rem;
+        }
+        
+        .invisible-dots {
+            font-family: Arial, sans-serif;
+            color: #9f7aea;
+            letter-spacing: 1px;
+        }
+        
+        .script {
+            font-family: 'Brush Script MT', cursive;
+            color: #38ef7d;
+            font-size: 1.4rem;
         }
         
         .old-english {
@@ -517,7 +528,7 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-wand-magic-sparkles floating floating-1"></i> Генератор стилизованного текста</h1>
-            <div class="subtitle">Преобразуйте ваш текст в 17 различных стилей. Просто введите текст, выберите стиль и нажмите "Сгенерировать"</div>
+            <div class="subtitle">Преобразуйте ваш текст в 18 различных стилей. Просто введите текст, выберите стиль и нажмите "Сгенерировать"</div>
         </header>
         
         <div class="main-content">
@@ -562,6 +573,10 @@
                             <div class="option-title">Невидимые чернила</div>
                             <div class="option-preview invisible-placeholder">[невидимый текст]</div>
                         </div>
+                        <div class="option" data-type="invisible-dots">
+                            <div class="option-title">Текст с разделителями</div>
+                            <div class="option-preview invisible-dots">f҉a҉n҉c҉y҉</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -579,14 +594,18 @@
                         <div class="option" data-type="bubble">
                             <div class="option-title">Пузырьковый текст</div>
                             <div class="option-preview">
-                                <span class="bubble">Пузырь</span>
+                                <span class="bubble">🅛🅞🅡🅔🅜</span>
                             </div>
                         </div>
                         <div class="option" data-type="square">
                             <div class="option-title">Квадратный текст</div>
                             <div class="option-preview">
-                                <span class="square">Квадрат</span>
+                                <span class="square">🆃🅴🆇🆃</span>
                             </div>
+                        </div>
+                        <div class="option" data-type="script">
+                            <div class="option-title">Рукописный</div>
+                            <div class="option-preview script">𝓣𝓮𝔁𝓽</div>
                         </div>
                         <div class="option" data-type="bold">
                             <div class="option-title">Жирный</div>
@@ -697,14 +716,24 @@
                     return `<span class="small-caps">${text}</span>`;
                 }
                 
-                // Обработка пузырькового текста (обновлено)
+                // Обработка пузырькового текста
                 if (type === 'bubble') {
-                    return `<span class="bubble">${text}</span>`;
+                    return `<span class="bubble">${generateBubbleText(text)}</span>`;
                 }
                 
-                // Обработка квадратного текста (обновлено)
+                // Обработка квадратного текста
                 if (type === 'square') {
-                    return `<span class="square">${text}</span>`;
+                    return `<span class="square">${generateSquareText(text)}</span>`;
+                }
+                
+                // Обработка текста с разделителями
+                if (type === 'invisible-dots') {
+                    return `<span class="invisible-dots">${generateInvisibleDotsText(text)}</span>`;
+                }
+                
+                // Обработка рукописного текста
+                if (type === 'script') {
+                    return `<span class="script">${generateScriptText(text)}</span>`;
                 }
                 
                 // Обработка жирного текста
@@ -757,6 +786,110 @@
                 
                 for (let i = 0; i < text.length; i++) {
                     result += text[i] + effectChar;
+                }
+                
+                return result;
+            }
+            
+            /**
+             * Генерирует пузырьковый текст
+             * @param {string} text - Исходный текст
+             * @returns {string} Пузырьковый текст
+             */
+            function generateBubbleText(text) {
+                const bubbleMap = {
+                    'A': '🅐', 'B': '🅑', 'C': '🅒', 'D': '🅓', 'E': '🅔',
+                    'F': '🅕', 'G': '🅖', 'H': '🅗', 'I': '🅘', 'J': '🅙',
+                    'K': '🅚', 'L': '🅛', 'M': '🅜', 'N': '🅝', 'O': '🅞',
+                    'P': '🅟', 'Q': '🅠', 'R': '🅡', 'S': '🅢', 'T': '🅣',
+                    'U': '🅤', 'V': '🅥', 'W': '🅦', 'X': '🅧', 'Y': '🅨', 'Z': '🅩',
+                    'a': '🅐', 'b': '🅑', 'c': '🅒', 'd': '🅓', 'e': '🅔',
+                    'f': '🅕', 'g': '🅖', 'h': '🅗', 'i': '🅘', 'j': '🅙',
+                    'k': '🅚', 'l': '🅛', 'm': '🅜', 'n': '🅝', 'o': '🅞',
+                    'p': '🅟', 'q': '🅠', 'r': '🅡', 's': '🅢', 't': '🅣',
+                    'u': '🅤', 'v': '🅥', 'w': '🅦', 'x': '🅧', 'y': '🅨', 'z': '🅩',
+                    '0': '⓿', '1': '➊', '2': '➋', '3': '➌', '4': '➍', 
+                    '5': '➎', '6': '➏', '7': '➐', '8': '➑', '9': '➒'
+                };
+                
+                let result = '';
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    result += bubbleMap[char] || char;
+                }
+                
+                return result;
+            }
+            
+            /**
+             * Генерирует квадратный текст
+             * @param {string} text - Исходный текст
+             * @returns {string} Квадратный текст
+             */
+            function generateSquareText(text) {
+                const squareMap = {
+                    'A': '🄰', 'B': '🄱', 'C': '🄲', 'D': '🄳', 'E': '🄴',
+                    'F': '🄵', 'G': '🄶', 'H': '🄷', 'I': '🄸', 'J': '🄹',
+                    'K': '🄺', 'L': '🄻', 'M': '🄼', 'N': '🄽', 'O': '🄾',
+                    'P': '🄿', 'Q': '🅀', 'R': '🅁', 'S': '🅂', 'T': '🅃',
+                    'U': '🅄', 'V': '🅅', 'W': '🅆', 'X': '🅇', 'Y': '🅈', 'Z': '🅉',
+                    'a': '🄰', 'b': '🄱', 'c': '🄲', 'd': '🄳', 'e': '🄴',
+                    'f': '🄵', 'g': '🄶', 'h': '🄷', 'i': '🄸', 'j': '🄹',
+                    'k': '🄺', 'l': '🄻', 'm': '🄼', 'n': '🄽', 'o': '🄾',
+                    'p': '🄿', 'q': '🅀', 'r': '🅁', 's': '🅂', 't': '🅃',
+                    'u': '🅄', 'v': '🅅', 'w': '🅆', 'x': '🅇', 'y': '🅈', 'z': '🅉',
+                    '0': '⓿', '1': '➊', '2': '➋', '3': '➌', '4': '➍', 
+                    '5': '➎', '6': '➏', '7': '➐', '8': '➑', '9': '➒'
+                };
+                
+                let result = '';
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    result += squareMap[char] || char;
+                }
+                
+                return result;
+            }
+            
+            /**
+             * Генерирует текст с разделителями
+             * @param {string} text - Исходный текст
+             * @returns {string} Текст с разделителями
+             */
+            function generateInvisibleDotsText(text) {
+                const separator = '\u0489'; // ҉
+                let result = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    result += text[i] + separator;
+                }
+                
+                return result;
+            }
+            
+            /**
+             * Генерирует рукописный текст
+             * @param {string} text - Исходный текст
+             * @returns {string} Рукописный текст
+             */
+            function generateScriptText(text) {
+                const scriptMap = {
+                    'A': '𝓐', 'B': '𝓑', 'C': '𝓒', 'D': '𝓓', 'E': '𝓔',
+                    'F': '𝓕', 'G': '𝓖', 'H': '𝓗', 'I': '𝓘', 'J': '𝓙',
+                    'K': '𝓚', 'L': '𝓛', 'M': '𝓜', 'N': '𝓝', 'O': '𝓞',
+                    'P': '𝓟', 'Q': '𝓠', 'R': '𝓡', 'S': '𝓢', 'T': '𝓣',
+                    'U': '𝓤', 'V': '𝓥', 'W': '𝓦', 'X': '𝓧', 'Y': '𝓨', 'Z': '𝓩',
+                    'a': '𝓪', 'b': '𝓫', 'c': '𝓬', 'd': '𝓭', 'e': '𝓮',
+                    'f': '𝓯', 'g': '𝓰', 'h': '𝓱', 'i': '𝓲', 'j': '𝓳',
+                    'k': '𝓴', 'l': '𝓵', 'm': '𝓶', 'n': '𝓷', 'o': '𝓸',
+                    'p': '𝓹', 'q': '𝓺', 'r': '𝓻', 's': '𝓼', 't': '𝓽',
+                    'u': '𝓾', 'v': '𝓿', 'w': '𝔀', 'x': '𝔁', 'y': '𝔂', 'z': '𝔃'
+                };
+                
+                let result = '';
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    result += scriptMap[char] || char;
                 }
                 
                 return result;
