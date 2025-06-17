@@ -1,1 +1,1 @@
-# Stylized-Text-Generator
+Website for generating different fonts. For example strikethrough, bold, zalgo.
