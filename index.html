@@ -6,48 +6,442 @@
     <title>Генератор стилизованного текста</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Все стили остаются такими же как в вашем коде */
-        /* Я только добавил/изменил следующие стили: */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
         
-        /* Исправленное отображение пузырькового текста */
-        .bubble {
-            display: inline-block;
-            background: linear-gradient(145deg, #6a11cb, #2575fc);
+        body {
+            background: linear-gradient(135deg, #1a0a2e, #2d0a50, #4a1b6d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Анимация фона */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        body {
+            background: linear-gradient(-45deg, #1a0a2e, #2d0a50, #4a1b6d, #6a11cb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+        
+        /* Анимация появления контейнера */
+        @keyframes containerAppear {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(15, 10, 35, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: containerAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform-origin: center;
+            opacity: 0;
+        }
+        
+        /* Анимация появления заголовка */
+        @keyframes titleAppear {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        header {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
             color: white;
-            padding: 2px 8px;
-            margin: 0 2px;
-            border-radius: 12px;
+            text-align: center;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            animation: titleAppear 0.8s 0.3s ease-out forwards;
+            opacity: 0;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: rotateLight 20s linear infinite;
+        }
+        
+        @keyframes rotateLight {
+            0% { transform: rotate(30deg); }
+            100% { transform: rotate(390deg); }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Анимация появления контента */
+        @keyframes contentAppear {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .main-content {
+            padding: 30px;
+            animation: contentAppear 0.8s 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .input-group, .output-group {
+            margin-bottom: 25px;
+            animation: contentAppear 0.8s 0.7s ease-out forwards;
+            opacity: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #a78bfa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        textarea, .output-display {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #4a5568;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+            background-color: rgba(26, 32, 44, 0.7);
+            color: #e2e8f0;
+        }
+        
+        .output-display {
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(106, 17, 203, 0.5); }
+            to { box-shadow: 0 0 20px rgba(106, 17, 203, 0.8); }
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.3);
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+            animation: contentAppear 0.8s 0.9s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .options-section {
+            background: rgba(30, 30, 60, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .options-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #9f7aea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        /* Анимация опций */
+        .option {
+            background: rgba(45, 55, 85, 0.7);
+            border: 2px solid #4a5568;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: optionAppear 0.5s ease-out forwards;
+        }
+        
+        @keyframes optionAppear {
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .option:nth-child(1) { animation-delay: 1.0s; }
+        .option:nth-child(2) { animation-delay: 1.1s; }
+        .option:nth-child(3) { animation-delay: 1.2s; }
+        .option:nth-child(4) { animation-delay: 1.3s; }
+        .option:nth-child(5) { animation-delay: 1.4s; }
+        .option:nth-child(6) { animation-delay: 1.5s; }
+        .option:nth-child(7) { animation-delay: 1.6s; }
+        .option:nth-child(8) { animation-delay: 1.7s; }
+        .option:nth-child(9) { animation-delay: 1.8s; }
+        .option:nth-child(10) { animation-delay: 1.9s; }
+        .option:nth-child(11) { animation-delay: 2.0s; }
+        .option:nth-child(12) { animation-delay: 2.1s; }
+        
+        .option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-color: #6a11cb;
+        }
+        
+        .option.selected {
+            background: rgba(74, 29, 109, 0.5);
+            border-color: #9f7aea;
+            box-shadow: 0 0 0 3px rgba(159, 122, 234, 0.3);
+        }
+        
+        .option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #6a11cb;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            line-height: 1.4;
-            font-size: 1.1rem; /* Добавлено */
-            font-family: inherit; /* Добавлено */
+            animation: checkAppear 0.3s ease;
         }
         
-        /* Исправленное отображение квадратного текста */
-        .square {
-            display: inline-block;
-            background: #4a5568;
+        @keyframes checkAppear {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+        
+        .option-preview {
+            font-size: 0.9rem;
+            color: #9f7aea;
+            height: 20px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 15px;
+            animation: contentAppear 0.8s 1.1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transform: scale(0.95);
+            opacity: 0;
+            animation: buttonAppear 0.5s 1.3s ease-out forwards;
+        }
+        
+        @keyframes buttonAppear {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .generate-btn {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
             color: white;
-            padding: 0 5px;
-            margin: 0 1px;
-            border-radius: 4px;
-            line-height: 1.4;
-            font-size: 1.1rem; /* Добавлено */
-            font-family: inherit; /* Добавлено */
-            height: 24px; /* Добавлено */
-            min-width: 24px; /* Добавлено */
-            text-align: center; /* Добавлено */
         }
         
-        /* Стиль для надстрочного текста */
-        .superscript {
-            vertical-align: super;
-            font-size: 0.8em;
-            font-family: inherit; /* Добавлено */
+        .copy-btn {
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            color: white;
         }
         
-        /* Улучшенное отображение невидимого текста */
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .output-group {
+            position: relative;
+            animation: contentAppear 0.8s 1.4s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .copy-success {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(56, 239, 125, 0.9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-success.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .info-text {
+            background: rgba(74, 29, 109, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #cbd5e0;
+            border-left: 4px solid #9f7aea;
+            animation: contentAppear 0.8s 1.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(26, 32, 44, 0.7);
+            color: #a0aec0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(74, 85, 104, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: contentAppear 0.8s 1.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: #9f7aea;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            color: #6a11cb;
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Special styling for text types */
+        .zalgo {
+            letter-spacing: 1px;
+            line-height: 1.8;
+        }
+        
         .invisible-placeholder {
             color: #718096;
             font-style: italic;
@@ -64,17 +458,266 @@
             color: #718096;
         }
         
-        /* Остальные стили остаются без изменений */
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 1px #9f7aea;
+            text-stroke: 1px #9f7aea;
+        }
+        
+        .small-caps {
+            font-variant: small-caps;
+            letter-spacing: 1px;
+        }
+        
+        .bubble {
+            display: inline-block;
+            background: linear-gradient(145deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 2px 8px;
+            margin: 0 2px;
+            border-radius: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.4;
+            font-size: 1.1rem;
+            font-family: inherit;
+        }
+        
+        .square {
+            display: inline-block;
+            background: #4a5568;
+            color: white;
+            padding: 0 5px;
+            margin: 0 1px;
+            border-radius: 4px;
+            line-height: 1.4;
+            font-size: 1.1rem;
+            font-family: inherit;
+            height: 24px;
+            min-width: 24px;
+            text-align: center;
+        }
+        
+        .old-english {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .upside-down {
+            display: inline-block;
+            transform: rotate(180deg);
+        }
+        
+        .superscript {
+            vertical-align: super;
+            font-size: 0.8em;
+            font-family: inherit;
+        }
+        
+        .bold-text {
+            font-weight: bold;
+        }
+        
+        .italic-text {
+            font-style: italic;
+        }
+        
+        .serif-text {
+            font-family: Georgia, serif;
+        }
+        
+        .sans-serif-text {
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Анимация при генерации текста */
+        @keyframes textGenerated {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .text-generated {
+            animation: textGenerated 0.5s ease;
+        }
+        
+        /* Парящие элементы */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        .floating-1 { animation-delay: 0.2s; }
+        .floating-2 { animation-delay: 0.4s; }
+        .floating-3 { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
-    <!-- HTML остается таким же как в вашем коде -->
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-wand-magic-sparkles floating floating-1"></i> Генератор стилизованного текста</h1>
+            <div class="subtitle">Преобразуйте ваш текст в 17 различных стилей. Просто введите текст, выберите стиль и нажмите "Сгенерировать"</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="input-group">
+                <label for="inputText"><i class="fas fa-pen floating floating-2"></i> Введите ваш текст:</label>
+                <textarea id="inputText" placeholder="Введите текст для преобразования...">Пример текста для генерации эффектов</textarea>
+            </div>
+            
+            <div class="options-container">
+                <div class="options-section">
+                    <div class="section-title"><i class="fas fa-brush floating floating-3"></i> Основные стили</div>
+                    <div class="options">
+                        <div class="option" data-type="strike">
+                            <div class="option-title">Зачеркнутый</div>
+                            <div class="option-preview">S̶t̶r̶i̶k̶e̶</div>
+                        </div>
+                        <div class="option" data-type="underline">
+                            <div class="option-title">Подчеркнутый</div>
+                            <div class="option-preview">U̲n̲d̲e̲r̲l̲i̲n̲e̲</div>
+                        </div>
+                        <div class="option" data-type="dotted">
+                            <div class="option-title">Пунктирная линия</div>
+                            <div class="option-preview">D̤o̤t̤t̤e̤d̤</div>
+                        </div>
+                        <div class="option" data-type="slash">
+                            <div class="option-title">Символ слеш</div>
+                            <div class="option-preview">S̷l̷a̷s̷h̷</div>
+                        </div>
+                        <div class="option" data-type="double">
+                            <div class="option-title">Двойное подчеркивание</div>
+                            <div class="option-preview">D̳o̳u̳b̳l̳e̳</div>
+                        </div>
+                        <div class="option" data-type="wave">
+                            <div class="option-title">Волна линий</div>
+                            <div class="option-preview">W̰a̰v̰ḛ</div>
+                        </div>
+                        <div class="option" data-type="zalgo">
+                            <div class="option-title">Zalgo</div>
+                            <div class="option-preview zalgo">Z̷͇͑a̵̡͝l̶̳͝ǵ̶͕o̷̘̿</div>
+                        </div>
+                        <div class="option" data-type="invisible">
+                            <div class="option-title">Невидимые чернила</div>
+                            <div class="option-preview invisible-placeholder">[невидимый текст]</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="options-section">
+                    <div class="section-title"><i class="fas fa-star floating floating-1"></i> Расширенные стили</div>
+                    <div class="options">
+                        <div class="option" data-type="outline">
+                            <div class="option-title">Контурный текст</div>
+                            <div class="option-preview outline-text">Outline</div>
+                        </div>
+                        <div class="option" data-type="smallCaps">
+                            <div class="option-title">Малые прописные</div>
+                            <div class="option-preview small-caps">Small Caps</div>
+                        </div>
+                        <div class="option" data-type="bubble">
+                            <div class="option-title">Пузырьковый текст</div>
+                            <div class="option-preview"><span class="bubble">Bubble</span></div>
+                        </div>
+                        <div class="option" data-type="square">
+                            <div class="option-title">Квадратный текст</div>
+                            <div class="option-preview"><span class="square">S</span><span class="square">q</span><span class="square">u</span><span class="square">a</span><span class="square">r</span><span class="square">e</span></div>
+                        </div>
+                        <div class="option" data-type="bold">
+                            <div class="option-title">Жирный</div>
+                            <div class="option-preview bold-text">Bold</div>
+                        </div>
+                        <div class="option" data-type="italic">
+                            <div class="option-title">Курсив</div>
+                            <div class="option-preview italic-text">Italic</div>
+                        </div>
+                        <div class="option" data-type="serif">
+                            <div class="option-title">С засечками</div>
+                            <div class="option-preview serif-text">Serif</div>
+                        </div>
+                        <div class="option" data-type="sansSerif">
+                            <div class="option-title">Без засечек</div>
+                            <div class="option-preview sans-serif-text">Sans-Serif</div>
+                        </div>
+                        <div class="option" data-type="oldEnglish">
+                            <div class="option-title">Староанглийский</div>
+                            <div class="option-preview old-english">Old English</div>
+                        </div>
+                        <div class="option" data-type="upsideDown">
+                            <div class="option-title">Вверх ногами</div>
+                            <div class="option-preview"><span class="upside-down">ɐqɯop</span></div>
+                        </div>
+                        <div class="option" data-type="superscript">
+                            <div class="option-title">Надстрочный</div>
+                            <div class="option-preview">Sᵘᵖᵉʳˢᶜʳᶦᵖᵗ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn generate-btn" id="generateBtn">
+                    <i class="fas fa-cogs"></i> Сгенерировать
+                </button>
+                <button class="btn copy-btn" id="copyBtn">
+                    <i class="far fa-copy"></i> Копировать
+                </button>
+            </div>
+            
+            <div class="output-group">
+                <label for="outputDisplay"><i class="fas fa-file-code"></i> Результат:</label>
+                <div class="output-display" id="outputDisplay"></div>
+                <div class="copy-success" id="copySuccess">
+                    <i class="fas fa-check-circle"></i> Скопировано в буфер обмена!
+                </div>
+            </div>
+            
+            <div class="info-text">
+                <p><i class="fas fa-lightbulb"></i> Советы: Невидимый текст можно вставить в мессенджеры. Для просмотра выделите текст. Для стилей "Вверх ногами" и "Zalgo" может потребоваться специальный шрифт.</p>
+            </div>
+        </div>
+        
+        <!-- ДОБАВЛЕН ЗАКРЫВАЮЩИЙ ТЕГ FOOTER -->
+        <footer>
+            <p>Генератор текста &copy; 2023 | Все стили созданы с помощью JavaScript</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+        </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ... ваш существующий код ...
+            const inputText = document.getElementById('inputText');
+            const outputDisplay = document.getElementById('outputDisplay');
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const copySuccess = document.getElementById('copySuccess');
+            const options = document.querySelectorAll('.option');
             
-            // ИСПРАВЛЕННАЯ ФУНКЦИЯ ГЕНЕРАЦИИ ТЕКСТА
+            let selectedOption = 'strike';
+            
+            // Выбор типа эффекта
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedOption = this.dataset.type;
+                });
+            });
+            
+            // Выбираем первый вариант по умолчанию
+            options[0].classList.add('selected');
+            
+            // Функция для генерации текста с эффектом
             function generateText(text, type) {
                 if (!text.trim()) return '';
                 
@@ -98,14 +741,14 @@
                     return `<span class="small-caps">${text}</span>`;
                 }
                 
-                // Обработка пузырькового текста (ИСПРАВЛЕНО)
+                // Обработка пузырькового текста
                 if (type === 'bubble') {
                     return text.split('').map(char => 
                         char === ' ' ? ' ' : `<span class="bubble">${char}</span>`
                     ).join('');
                 }
                 
-                // Обработка квадратного текста (ИСПРАВЛЕНО)
+                // Обработка квадратного текста
                 if (type === 'square') {
                     return text.split('').map(char => 
                         char === ' ' ? ' ' : `<span class="square">${char}</span>`
@@ -142,7 +785,7 @@
                     return `<span class="upside-down">${generateUpsideDownText(text)}</span>`;
                 }
                 
-                // Обработка надстрочного текста (ИСПРАВЛЕНО)
+                // Обработка надстрочного текста
                 if (type === 'superscript') {
                     return `<span class="superscript">${generateSuperscriptText(text)}</span>`;
                 }
@@ -167,31 +810,57 @@
                 return result;
             }
             
-            // ИСПРАВЛЕННАЯ ФУНКЦИЯ НАДСТРОЧНОГО ТЕКСТА
-            function generateSuperscriptText(text) {
-                const superscriptMap = {
-                    '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', 
-                    '7': '⁷', '8': '⁸', '9': '⁹', 'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 
-                    'e': 'ᵉ', 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 'i': 'ⁱ', 'j': 'ʲ', 'k': 'ᵏ', 
-                    'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ', 'p': 'ᵖ', 'q': '۹', 'r': 'ʳ', 
-                    's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ', 'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 'y': 'ʸ', 
-                    'z': 'ᶻ', 'A': 'ᴬ', 'B': 'ᴮ', 'C': 'ᶜ', 'D': 'ᴰ', 'E': 'ᴱ', 'F': 'ᶠ', 
-                    'G': 'ᴳ', 'H': 'ᴴ', 'I': 'ᴵ', 'J': 'ᴶ', 'K': 'ᴷ', 'L': 'ᴸ', 'M': 'ᴹ', 
-                    'N': 'ᴺ', 'O': 'ᴼ', 'P': 'ᴾ', 'Q': 'Q', 'R': 'ᴿ', 'S': 'ˢ', 'T': 'ᵀ', 
-                    'U': 'ᵁ', 'V': 'ⱽ', 'W': 'ᵂ', 'X': 'ˣ', 'Y': 'ʸ', 'Z': 'ᶻ', '+': '⁺', 
-                    '-': '⁻', '=': '⁼', '(': '⁽', ')': '⁾'
-                };
+            // Генерация Zalgo текста
+            function generateZalgoText(text) {
+                // Символы для создания "Zalgo" эффекта
+                const zalgoChars = [
+                    '\u0300', '\u0301', '\u0302', '\u0303', '\u0304', 
+                    '\u0305', '\u0306', '\u0307', '\u0308', '\u0309', 
+                    '\u030A', '\u030B', '\u030C', '\u030D', '\u030E', 
+                    '\u030F', '\u0310', '\u0311', '\u0312', '\u0313', 
+                    '\u0314', '\u0315', '\u031A', '\u031B', '\u0320', 
+                    '\u0321', '\u0322', '\u0323', '\u0324', '\u0325', 
+                    '\u0326', '\u0327', '\u0328', '\u0329', '\u032A', 
+                    '\u032B', '\u032C', '\u032D', '\u032E', '\u032F', 
+                    '\u0330', '\u0331', '\u0332', '\u0333', '\u0334', 
+                    '\u0335', '\u0336', '\u0337', '\u0338', '\u0339', 
+                    '\u033A', '\u033B', '\u033C', '\u033D', '\u033E', 
+                    '\u033F', '\u0340', '\u0341', '\u0342', '\u0343', 
+                    '\u0344', '\u0345', '\u0346', '\u0347', '\u0348', 
+                    '\u0349', '\u034A', '\u034B', '\u034C', '\u034D', 
+                    '\u034E', '\u034F', '\u0350', '\u0351', '\u0352', 
+                    '\u0353', '\u0354', '\u0355', '\u0356', '\u0357', 
+                    '\u0358', '\u0359', '\u035A', '\u035B', '\u035C', 
+                    '\u035D', '\u035E', '\u035F', '\u0360', '\u0361', 
+                    '\u0362', '\u0363', '\u0364', '\u0365', '\u0366', 
+                    '\u0367', '\u0368', '\u0369', '\u036A', '\u036B', 
+                    '\u036C', '\u036D', '\u036E', '\u036F'
+                ];
                 
                 let result = '';
+                
                 for (let i = 0; i < text.length; i++) {
-                    const char = text[i];
-                    result += superscriptMap[char.toLowerCase()] || char;
+                    result += text[i];
+                    
+                    // Добавляем случайное количество символов Zalgo
+                    const topCount = Math.floor(Math.random() * 5) + 1;
+                    const bottomCount = Math.floor(Math.random() * 3) + 1;
+                    
+                    // Верхние символы
+                    for (let j = 0; j < topCount; j++) {
+                        result += zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
+                    }
+                    
+                    // Нижние символы
+                    for (let j = 0; j < bottomCount; j++) {
+                        result += zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
+                    }
                 }
                 
                 return result;
             }
             
-            // ИСПРАВЛЕННАЯ ФУНКЦИЯ НЕВИДИМЫХ ЧЕРНИЛ
+            // Генерация невидимого текста
             function generateInvisibleText(text) {
                 // Невидимые символы
                 const invisibleChars = ['\u200B', '\u200C', '\u200D', '\u2060', '\uFEFF'];
@@ -210,9 +879,121 @@
                 return result;
             }
             
-            // Остальной код остается без изменений
-            // ...
+            // Генерация текста вверх ногами
+            function generateUpsideDownText(text) {
+                const charMap = {
+                    'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ', 
+                    'h': 'ɥ', 'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u', 
+                    'o': 'o', 'p': 'd', 'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n', 
+                    'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 'y': 'ʎ', 'z': 'z', 'A': '∀', 'B': '𐐒', 
+                    'C': 'Ↄ', 'D': '◖', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': '⅁', 'H': 'H', 'I': 'I', 
+                    'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N', 'O': 'O', 'P': 'Ԁ', 
+                    'Q': 'Ό', 'R': 'ᴚ', 'S': 'S', 'T': '⊥', 'U': '∩', 'V': 'Λ', 'W': 'M', 
+                    'X': 'X', 'Y': '⅄', 'Z': 'Z', '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', 
+                    '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6', '.': '˙', 
+                    ',': '\'', '\'': ',', '"': ',,', '`': ',', '?': '¿', '!': '¡', '&': '⅋', 
+                    '_': '‾', '(': ')', ')': '(', '[': ']', ']': '[', '{': '}', '}': '{', 
+                    '<': '>', '>': '<'
+                };
+                
+                let result = '';
+                for (let i = text.length - 1; i >= 0; i--) {
+                    const char = text[i];
+                    result += charMap[char] || char;
+                }
+                
+                return result;
+            }
+            
+            // Генерация надстрочного текста
+            function generateSuperscriptText(text) {
+                const superscriptMap = {
+                    '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', 
+                    '7': '⁷', '8': '⁸', '9': '⁹', 'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 
+                    'e': 'ᵉ', 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 'i': 'ⁱ', 'j': 'ʲ', 'k': 'ᵏ', 
+                    'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ', 'p': 'ᵖ', 'q': '۹', 'r': 'ʳ', 
+                    's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ', 'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 'y': 'ʸ', 
+                    'z': 'ᶻ', 'A': 'ᴬ', 'B': 'ᴮ', 'C': 'ᶜ', 'D': 'ᴰ', 'E': 'ᴱ', 'F': 'ᶠ', 
+                    'G': 'ᴳ', 'H': 'ᴴ', 'I': 'ᴵ', 'J': 'ᴶ', 'K': 'ᴷ', 'L': 'ᴸ', 'M': 'ᴹ', 
+                    'N': 'ᴺ', 'O': 'ᴼ', 'P': 'ᴾ', 'Q': 'Q', 'R': 'ᴿ', 'S': 'ˢ', 'T': 'ᵀ', 
+                    'U': 'ᵁ', 'V': 'ⱽ', 'W': 'ᵂ', 'X': 'ˣ', 'Y': 'ʸ', 'Z': 'ᶻ', '+': '⁺', 
+                    '-': '⁻', '=': '⁼', '(': '⁽', ')': '⁾'
+                };
+                
+                let result = '';
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    result += superscriptMap[char] || char;
+                }
+                
+                return result;
+            }
+            
+            // Генерация текста
+            generateBtn.addEventListener('click', function() {
+                const text = inputText.value;
+                if (!text.trim()) {
+                    outputDisplay.textContent = 'Введите текст для преобразования';
+                    return;
+                }
+                
+                const result = generateText(text, selectedOption);
+                outputDisplay.innerHTML = result;
+                
+                // Добавляем анимацию при генерации
+                outputDisplay.classList.remove('text-generated');
+                setTimeout(() => {
+                    outputDisplay.classList.add('text-generated');
+                }, 10);
+                
+                // Добавляем класс для стилизации Zalgo текста
+                if (selectedOption === 'zalgo') {
+                    outputDisplay.classList.add('zalgo');
+                } else {
+                    outputDisplay.classList.remove('zalgo');
+                }
+                
+                // Для невидимого текста добавляем плейсхолдер
+                if (selectedOption === 'invisible') {
+                    outputDisplay.classList.add('invisible-placeholder');
+                    outputDisplay.innerHTML = result || ' '; // Гарантируем что будет хотя бы пробел
+                } else {
+                    outputDisplay.classList.remove('invisible-placeholder');
+                }
+            });
+            
+            // Копирование в буфер обмена
+            copyBtn.addEventListener('click', function() {
+                if (!outputDisplay.textContent.trim() && selectedOption !== 'invisible') return;
+                
+                const range = document.createRange();
+                range.selectNode(outputDisplay);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        copySuccess.classList.add('show');
+                        setTimeout(() => {
+                            copySuccess.classList.remove('show');
+                        }, 2000);
+                    } else {
+                        throw new Error('Copy command failed');
+                    }
+                } catch (err) {
+                    console.error('Ошибка копирования: ', err);
+                    alert('Не удалось скопировать текст');
+                } finally {
+                    window.getSelection().removeAllRanges();
+                }
+            });
+            
+            // Генерация текста при загрузке
+            setTimeout(() => {
+                generateBtn.click();
+            }, 1800);
         });
     </script>
 </body>
-    </html>
+</html>
