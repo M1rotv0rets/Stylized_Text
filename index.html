@@ -21,6 +21,26 @@
             align-items: center;
             padding: 20px;
             color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Анимация фона */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        body {
+            background: linear-gradient(-45deg, #1a0a2e, #2d0a50, #4a1b6d, #6a11cb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+        
+        /* Анимация появления контейнера */
+        @keyframes containerAppear {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         
         .container {
@@ -32,6 +52,15 @@
             overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: containerAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform-origin: center;
+            opacity: 0;
+        }
+        
+        /* Анимация появления заголовка */
+        @keyframes titleAppear {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
         
         header {
@@ -41,6 +70,8 @@
             padding: 25px;
             position: relative;
             overflow: hidden;
+            animation: titleAppear 0.8s 0.3s ease-out forwards;
+            opacity: 0;
         }
         
         header::before {
@@ -52,6 +83,12 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
             transform: rotate(30deg);
+            animation: rotateLight 20s linear infinite;
+        }
+        
+        @keyframes rotateLight {
+            0% { transform: rotate(30deg); }
+            100% { transform: rotate(390deg); }
         }
         
         h1 {
@@ -71,12 +108,22 @@
             line-height: 1.6;
         }
         
+        /* Анимация появления контента */
+        @keyframes contentAppear {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
         .main-content {
             padding: 30px;
+            animation: contentAppear 0.8s 0.5s ease-out forwards;
+            opacity: 0;
         }
         
         .input-group, .output-group {
             margin-bottom: 25px;
+            animation: contentAppear 0.8s 0.7s ease-out forwards;
+            opacity: 0;
         }
         
         label {
@@ -90,9 +137,9 @@
             gap: 10px;
         }
         
-        textarea {
+        textarea, .output-display {
             width: 100%;
-            height: 120px;
+            min-height: 120px;
             padding: 15px;
             border: 2px solid #4a5568;
             border-radius: 10px;
@@ -101,6 +148,18 @@
             transition: all 0.3s ease;
             background-color: rgba(26, 32, 44, 0.7);
             color: #e2e8f0;
+        }
+        
+        .output-display {
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(106, 17, 203, 0.5); }
+            to { box-shadow: 0 0 20px rgba(106, 17, 203, 0.8); }
         }
         
         textarea:focus {
@@ -114,6 +173,8 @@
             flex-direction: column;
             gap: 15px;
             margin-bottom: 25px;
+            animation: contentAppear 0.8s 0.9s ease-out forwards;
+            opacity: 0;
         }
         
         .options-section {
@@ -121,6 +182,11 @@
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .options-section:hover {
+            transform: translateY(-5px);
         }
         
         .section-title {
@@ -138,6 +204,7 @@
             gap: 15px;
         }
         
+        /* Анимация опций */
         .option {
             background: rgba(45, 55, 85, 0.7);
             border: 2px solid #4a5568;
@@ -148,7 +215,27 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: optionAppear 0.5s ease-out forwards;
         }
+        
+        @keyframes optionAppear {
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .option:nth-child(1) { animation-delay: 1.0s; }
+        .option:nth-child(2) { animation-delay: 1.1s; }
+        .option:nth-child(3) { animation-delay: 1.2s; }
+        .option:nth-child(4) { animation-delay: 1.3s; }
+        .option:nth-child(5) { animation-delay: 1.4s; }
+        .option:nth-child(6) { animation-delay: 1.5s; }
+        .option:nth-child(7) { animation-delay: 1.6s; }
+        .option:nth-child(8) { animation-delay: 1.7s; }
+        .option:nth-child(9) { animation-delay: 1.8s; }
+        .option:nth-child(10) { animation-delay: 1.9s; }
+        .option:nth-child(11) { animation-delay: 2.0s; }
+        .option:nth-child(12) { animation-delay: 2.1s; }
         
         .option:hover {
             transform: translateY(-5px);
@@ -176,6 +263,13 @@
             justify-content: center;
             align-items: center;
             font-weight: bold;
+            animation: checkAppear 0.3s ease;
+        }
+        
+        @keyframes checkAppear {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
         
         .option-title {
@@ -195,6 +289,8 @@
             justify-content: space-between;
             gap: 15px;
             margin-bottom: 15px;
+            animation: contentAppear 0.8s 1.1s ease-out forwards;
+            opacity: 0;
         }
         
         .btn {
@@ -212,6 +308,14 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            transform: scale(0.95);
+            opacity: 0;
+            animation: buttonAppear 0.5s 1.3s ease-out forwards;
+        }
+        
+        @keyframes buttonAppear {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         
         .generate-btn {
@@ -235,6 +339,8 @@
         
         .output-group {
             position: relative;
+            animation: contentAppear 0.8s 1.4s ease-out forwards;
+            opacity: 0;
         }
         
         .copy-success {
@@ -267,6 +373,8 @@
             font-size: 0.95rem;
             color: #cbd5e0;
             border-left: 4px solid #9f7aea;
+            animation: contentAppear 0.8s 1.5s ease-out forwards;
+            opacity: 0;
         }
         
         footer {
@@ -279,6 +387,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            animation: contentAppear 0.8s 1.6s ease-out forwards;
+            opacity: 0;
         }
         
         .social-links {
@@ -349,12 +459,15 @@
         }
         
         .bubble {
+            display: inline-block;
             background: linear-gradient(145deg, #6a11cb, #2575fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: white;
+            padding: 2px 8px;
+            margin: 0 2px;
+            border-radius: 12px;
             font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.4;
         }
         
         .square {
@@ -374,32 +487,74 @@
         }
         
         .upside-down {
-            transform: rotate(180deg);
             display: inline-block;
+            transform: rotate(180deg);
         }
         
         .superscript {
             vertical-align: super;
             font-size: 0.8em;
         }
+        
+        .bold-text {
+            font-weight: bold;
+        }
+        
+        .italic-text {
+            font-style: italic;
+        }
+        
+        .serif-text {
+            font-family: Georgia, serif;
+        }
+        
+        .sans-serif-text {
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Анимация при генерации текста */
+        @keyframes textGenerated {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .text-generated {
+            animation: textGenerated 0.5s ease;
+        }
+        
+        /* Парящие элементы */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        .floating-1 { animation-delay: 0.2s; }
+        .floating-2 { animation-delay: 0.4s; }
+        .floating-3 { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-wand-magic-sparkles"></i> Генератор стилизованного текста</h1>
+            <h1><i class="fas fa-wand-magic-sparkles floating floating-1"></i> Генератор стилизованного текста</h1>
             <div class="subtitle">Преобразуйте ваш текст в 17 различных стилей. Просто введите текст, выберите стиль и нажмите "Сгенерировать"</div>
         </header>
         
         <div class="main-content">
             <div class="input-group">
-                <label for="inputText"><i class="fas fa-pen"></i> Введите ваш текст:</label>
+                <label for="inputText"><i class="fas fa-pen floating floating-2"></i> Введите ваш текст:</label>
                 <textarea id="inputText" placeholder="Введите текст для преобразования...">Пример текста для генерации эффектов</textarea>
             </div>
             
             <div class="options-container">
                 <div class="options-section">
-                    <div class="section-title"><i class="fas fa-brush"></i> Основные стили</div>
+                    <div class="section-title"><i class="fas fa-brush floating floating-3"></i> Основные стили</div>
                     <div class="options">
                         <div class="option" data-type="strike">
                             <div class="option-title">Зачеркнутый</div>
@@ -437,7 +592,7 @@
                 </div>
                 
                 <div class="options-section">
-                    <div class="section-title"><i class="fas fa-star"></i> Расширенные стили</div>
+                    <div class="section-title"><i class="fas fa-star floating floating-1"></i> Расширенные стили</div>
                     <div class="options">
                         <div class="option" data-type="outline">
                             <div class="option-title">Контурный текст</div>
@@ -449,19 +604,27 @@
                         </div>
                         <div class="option" data-type="bubble">
                             <div class="option-title">Пузырьковый текст</div>
-                            <div class="option-preview bubble">Bubble</div>
+                            <div class="option-preview"><span class="bubble">Bubble</span></div>
                         </div>
                         <div class="option" data-type="square">
                             <div class="option-title">Квадратный текст</div>
-                            <div class="option-preview">[S][q][u][a][r][e]</div>
+                            <div class="option-preview"><span class="square">S</span><span class="square">q</span><span class="square">u</span><span class="square">a</span><span class="square">r</span><span class="square">e</span></div>
                         </div>
                         <div class="option" data-type="bold">
                             <div class="option-title">Жирный</div>
-                            <div class="option-preview" style="font-weight: bold">Bold</div>
+                            <div class="option-preview bold-text">Bold</div>
                         </div>
                         <div class="option" data-type="italic">
                             <div class="option-title">Курсив</div>
-                            <div class="option-preview" style="font-style: italic">Italic</div>
+                            <div class="option-preview italic-text">Italic</div>
+                        </div>
+                        <div class="option" data-type="serif">
+                            <div class="option-title">С засечками</div>
+                            <div class="option-preview serif-text">Serif</div>
+                        </div>
+                        <div class="option" data-type="sansSerif">
+                            <div class="option-title">Без засечек</div>
+                            <div class="option-preview sans-serif-text">Sans-Serif</div>
                         </div>
                         <div class="option" data-type="oldEnglish">
                             <div class="option-title">Староанглийский</div>
@@ -469,7 +632,7 @@
                         </div>
                         <div class="option" data-type="upsideDown">
                             <div class="option-title">Вверх ногами</div>
-                            <div class="option-preview upside-down">ɐqɯop</div>
+                            <div class="option-preview"><span class="upside-down">ɐqɯop</span></div>
                         </div>
                         <div class="option" data-type="superscript">
                             <div class="option-title">Надстрочный</div>
@@ -489,8 +652,8 @@
             </div>
             
             <div class="output-group">
-                <label for="outputText"><i class="fas fa-file-code"></i> Результат:</label>
-                <textarea id="outputText" readonly></textarea>
+                <label for="outputDisplay"><i class="fas fa-file-code"></i> Результат:</label>
+                <div class="output-display" id="outputDisplay"></div>
                 <div class="copy-success" id="copySuccess">
                     <i class="fas fa-check-circle"></i> Скопировано в буфер обмена!
                 </div>
@@ -514,7 +677,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const inputText = document.getElementById('inputText');
-            const outputText = document.getElementById('outputText');
+            const outputDisplay = document.getElementById('outputDisplay');
             const generateBtn = document.getElementById('generateBtn');
             const copyBtn = document.getElementById('copyBtn');
             const copySuccess = document.getElementById('copySuccess');
@@ -538,26 +701,6 @@
             function generateText(text, type) {
                 if (!text.trim()) return '';
                 
-                const effects = {
-                    strike: '\u0336',    // Combining Long Stroke Overlay
-                    underline: '\u0332', // Combining Low Line
-                    dotted: '\u0323',    // Combining Dot Below
-                    slash: '\u0337',     // Combining Short Solidus Overlay
-                    double: '\u0333',    // Combining Double Low Line
-                    wave: '\u0330',      // Combining Tilde Below
-                    zalgo: null,        // Специальная обработка
-                    invisible: null,     // Специальная обработка
-                    outline: null,       // Специальная обработка
-                    smallCaps: null,     // Специальная обработка
-                    bubble: null,        // Специальная обработка
-                    square: null,        // Специальная обработка
-                    bold: null,          // Специальная обработка
-                    italic: null,        // Специальная обработка
-                    oldEnglish: null,    // Специальная обработка
-                    upsideDown: null,    // Специальная обработка
-                    superscript: null    // Специальная обработка
-                };
-                
                 // Обработка Zalgo текста
                 if (type === 'zalgo') {
                     return generateZalgoText(text);
@@ -580,22 +723,36 @@
                 
                 // Обработка пузырькового текста
                 if (type === 'bubble') {
-                    return `<span class="bubble">${text}</span>`;
+                    return text.split('').map(char => 
+                        char === ' ' ? ' ' : `<span class="bubble">${char}</span>`
+                    ).join('');
                 }
                 
                 // Обработка квадратного текста
                 if (type === 'square') {
-                    return generateSquareText(text);
+                    return text.split('').map(char => 
+                        char === ' ' ? ' ' : `<span class="square">${char}</span>`
+                    ).join('');
                 }
                 
                 // Обработка жирного текста
                 if (type === 'bold') {
-                    return `<strong>${text}</strong>`;
+                    return `<span class="bold-text">${text}</span>`;
                 }
                 
                 // Обработка курсива
                 if (type === 'italic') {
-                    return `<em>${text}</em>`;
+                    return `<span class="italic-text">${text}</span>`;
+                }
+                
+                // Обработка шрифта с засечками
+                if (type === 'serif') {
+                    return `<span class="serif-text">${text}</span>`;
+                }
+                
+                // Обработка шрифта без засечек
+                if (type === 'sansSerif') {
+                    return `<span class="sans-serif-text">${text}</span>`;
                 }
                 
                 // Обработка староанглийского текста
@@ -605,13 +762,23 @@
                 
                 // Обработка текста вверх ногами
                 if (type === 'upsideDown') {
-                    return generateUpsideDownText(text);
+                    return `<span class="upside-down">${generateUpsideDownText(text)}</span>`;
                 }
                 
                 // Обработка надстрочного текста
                 if (type === 'superscript') {
                     return generateSuperscriptText(text);
                 }
+                
+                // Базовые стили
+                const effects = {
+                    strike: '\u0336',    // Combining Long Stroke Overlay
+                    underline: '\u0332', // Combining Low Line
+                    dotted: '\u0323',    // Combining Dot Below
+                    slash: '\u0337',     // Combining Short Solidus Overlay
+                    double: '\u0333',    // Combining Double Low Line
+                    wave: '\u0330',      // Combining Tilde Below
+                };
                 
                 const effectChar = effects[type] || '';
                 let result = '';
@@ -742,66 +909,70 @@
                 return result;
             }
             
-            // Генерация квадратного текста
-            function generateSquareText(text) {
-                let result = '';
-                for (let i = 0; i < text.length; i++) {
-                    if (text[i] === ' ') {
-                        result += ' ';
-                    } else {
-                        result += `[${text[i]}]`;
-                    }
-                }
-                return result;
-            }
-            
             // Генерация текста
             generateBtn.addEventListener('click', function() {
                 const text = inputText.value;
                 if (!text.trim()) {
-                    outputText.value = 'Введите текст для преобразования';
+                    outputDisplay.textContent = 'Введите текст для преобразования';
                     return;
                 }
                 
                 const result = generateText(text, selectedOption);
-                outputText.value = result;
+                outputDisplay.innerHTML = result;
+                
+                // Добавляем анимацию при генерации
+                outputDisplay.classList.remove('text-generated');
+                setTimeout(() => {
+                    outputDisplay.classList.add('text-generated');
+                }, 10);
                 
                 // Добавляем класс для стилизации Zalgo текста
                 if (selectedOption === 'zalgo') {
-                    outputText.classList.add('zalgo');
+                    outputDisplay.classList.add('zalgo');
                 } else {
-                    outputText.classList.remove('zalgo');
+                    outputDisplay.classList.remove('zalgo');
                 }
                 
                 // Для невидимого текста добавляем плейсхолдер
                 if (selectedOption === 'invisible') {
-                    outputText.classList.add('invisible-placeholder');
-                    outputText.value = result || ' '; // Гарантируем что будет хотя бы пробел
+                    outputDisplay.classList.add('invisible-placeholder');
+                    outputDisplay.innerHTML = result || ' '; // Гарантируем что будет хотя бы пробел
                 } else {
-                    outputText.classList.remove('invisible-placeholder');
+                    outputDisplay.classList.remove('invisible-placeholder');
                 }
             });
             
             // Копирование в буфер обмена
             copyBtn.addEventListener('click', function() {
-                if (!outputText.value.trim() && selectedOption !== 'invisible') return;
+                if (!outputDisplay.textContent.trim() && selectedOption !== 'invisible') return;
                 
-                outputText.select();
-                navigator.clipboard.writeText(outputText.value)
-                    .then(() => {
+                const range = document.createRange();
+                range.selectNode(outputDisplay);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
                         copySuccess.classList.add('show');
                         setTimeout(() => {
                             copySuccess.classList.remove('show');
                         }, 2000);
-                    })
-                    .catch(err => {
-                        console.error('Ошибка копирования: ', err);
-                        alert('Не удалось скопировать текст');
-                    });
+                    } else {
+                        throw new Error('Copy command failed');
+                    }
+                } catch (err) {
+                    console.error('Ошибка копирования: ', err);
+                    alert('Не удалось скопировать текст');
+                } finally {
+                    window.getSelection().removeAllRanges();
+                }
             });
             
             // Генерация текста при загрузке
-            generateBtn.click();
+            setTimeout(() => {
+                generateBtn.click();
+            }, 1800);
         });
     </script>
 </body>
