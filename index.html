@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор стилизованного текста</title>
+    <link rel="icon" href="Icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -410,33 +411,22 @@
             letter-spacing: 1px;
         }
         
+        /* Измененные стили для пузырькового текста */
         .bubble {
-            display: inline-block;
-            background: linear-gradient(145deg, #6a11cb, #2575fc);
-            color: white;
-            padding: 2px 8px;
-            margin: 0 2px;
-            border-radius: 12px;
+            font-family: 'Comic Sans MS', cursive;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            line-height: 1.4;
-            font-size: 1.1rem;
-            font-family: inherit;
+            color: #6a11cb;
+            letter-spacing: 1px;
+            font-size: 1.3rem;
         }
         
+        /* Измененные стили для квадратного текста */
         .square {
-            display: inline-block;
-            background: #4a5568;
-            color: white;
-            padding: 0 5px;
-            margin: 0 1px;
-            border-radius: 4px;
-            line-height: 1.4;
-            font-size: 1.1rem;
-            font-family: inherit;
-            height: 24px;
-            min-width: 24px;
-            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #4a5568;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
         }
         
         .old-english {
@@ -589,24 +579,13 @@
                         <div class="option" data-type="bubble">
                             <div class="option-title">Пузырьковый текст</div>
                             <div class="option-preview">
-                                <span class="bubble">П</span>
-                                <span class="bubble">у</span>
-                                <span class="bubble">з</span>
-                                <span class="bubble">ы</span>
-                                <span class="bubble">р</span>
-                                <span class="bubble">ь</span>
+                                <span class="bubble">Пузырь</span>
                             </div>
                         </div>
                         <div class="option" data-type="square">
                             <div class="option-title">Квадратный текст</div>
                             <div class="option-preview">
-                                <span class="square">К</span>
-                                <span class="square">в</span>
-                                <span class="square">а</span>
-                                <span class="square">д</span>
-                                <span class="square">р</span>
-                                <span class="square">а</span>
-                                <span class="square">т</span>
+                                <span class="square">Квадрат</span>
                             </div>
                         </div>
                         <div class="option" data-type="bold">
@@ -718,18 +697,14 @@
                     return `<span class="small-caps">${text}</span>`;
                 }
                 
-                // Обработка пузырькового текста
+                // Обработка пузырькового текста (обновлено)
                 if (type === 'bubble') {
-                    return text.split('').map(char => 
-                        char === ' ' ? ' ' : `<span class="bubble">${char}</span>`
-                    ).join('');
+                    return `<span class="bubble">${text}</span>`;
                 }
                 
-                // Обработка квадратного текста
+                // Обработка квадратного текста (обновлено)
                 if (type === 'square') {
-                    return text.split('').map(char => 
-                        char === ' ' ? ' ' : `<span class="square">${char}</span>`
-                    ).join('');
+                    return `<span class="square">${text}</span>`;
                 }
                 
                 // Обработка жирного текста
