@@ -1,21 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор стилизованного текста</title>
-    <link rel="icon" href="Icon.png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Подключены все необходимые шрифты -->
+    <!-- Подключение всех необходимых шрифтов -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Безопасный стек шрифтов */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
         }
         
         body {
@@ -27,6 +29,7 @@
             padding: 20px;
             color: #fff;
             overflow-x: hidden;
+            font-family: 'Quicksand', sans-serif;
         }
         
         /* Анимация фона */
@@ -77,6 +80,7 @@
             overflow: hidden;
             animation: titleAppear 0.8s 0.3s ease-out forwards;
             opacity: 0;
+            font-family: 'Quicksand', sans-serif;
         }
         
         header::before {
@@ -102,6 +106,8 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
             letter-spacing: 1px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
         }
         
         .subtitle {
@@ -111,6 +117,7 @@
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
+            font-family: 'Quicksand', sans-serif;
         }
         
         /* Анимация появления контента */
@@ -123,6 +130,7 @@
             padding: 30px;
             animation: contentAppear 0.8s 0.5s ease-out forwards;
             opacity: 0;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .input-group, .output-group {
@@ -140,6 +148,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Quicksand', sans-serif;
         }
         
         textarea, .output-display {
@@ -153,8 +162,7 @@
             transition: all 0.3s ease;
             background-color: rgba(26, 32, 44, 0.7);
             color: #e2e8f0;
-            /* Универсальный шрифт для поддержки символов */
-            font-family: 'Arial Unicode MS', 'Segoe UI Symbol', sans-serif;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .output-display {
@@ -165,6 +173,7 @@
             font-size: 1.3rem;
             line-height: 1.8;
             padding: 20px;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
         }
         
         @keyframes glow {
@@ -206,6 +215,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
         }
         
         .options {
@@ -275,6 +286,7 @@
             align-items: center;
             font-weight: bold;
             animation: checkAppear 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
         }
         
         @keyframes checkAppear {
@@ -287,14 +299,14 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: #e2e8f0;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .option-preview {
             font-size: 0.9rem;
             color: #9f7aea;
             height: 20px;
-            /* Универсальные шрифты для превью */
-            font-family: 'Arial Unicode MS', 'Segoe UI Symbol', sans-serif;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
         }
         
         .buttons {
@@ -324,6 +336,7 @@
             transform: scale(0.95);
             opacity: 0;
             animation: buttonAppear 0.5s 1.3s ease-out forwards;
+            font-family: 'Quicksand', sans-serif;
         }
         
         @keyframes buttonAppear {
@@ -371,6 +384,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .copy-success.show {
@@ -388,20 +402,21 @@
             border-left: 4px solid #9f7aea;
             animation: contentAppear 0.8s 1.5s ease-out forwards;
             opacity: 0;
+            font-family: 'Quicksand', sans-serif;
         }
         
         /* Special styling for text types */
         .zalgo {
             letter-spacing: 1px;
             line-height: 1.8;
-            /* Шрифт для Zalgo */
-            font-family: 'Arial Unicode MS', 'Segoe UI Symbol', sans-serif;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
         }
         
         .invisible-placeholder {
             color: #718096;
             font-style: italic;
             position: relative;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .invisible-placeholder::after {
@@ -412,22 +427,25 @@
             right: 0;
             text-align: center;
             color: #718096;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .outline-text {
             color: transparent;
             -webkit-text-stroke: 1px #9f7aea;
             text-stroke: 1px #9f7aea;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .small-caps {
             font-variant: small-caps;
             letter-spacing: 1px;
+            font-family: 'Quicksand', sans-serif;
         }
         
         /* Обновленные стили для текста */
         .bubble {
-            font-family: 'Arial Unicode MS', 'Segoe UI Symbol', sans-serif;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
             font-weight: bold;
             letter-spacing: 1px;
             color: #6a11cb;
@@ -435,7 +453,7 @@
         }
         
         .square {
-            font-family: 'Arial Unicode MS', 'Segoe UI Symbol', sans-serif;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
             font-weight: bold;
             letter-spacing: 1px;
             color: #4a5568;
@@ -443,7 +461,7 @@
         }
         
         .invisible-dots {
-            font-family: 'Arial Unicode MS', 'Segoe UI Symbol', sans-serif;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
             color: #9f7aea;
             letter-spacing: 1px;
         }
@@ -456,7 +474,6 @@
         }
         
         .old-english {
-            /* Добавлен специальный шрифт для готического стиля */
             font-family: 'MedievalSharp', 'Times New Roman', serif;
             font-weight: bold;
             letter-spacing: 1px;
@@ -465,20 +482,23 @@
         .upside-down {
             display: inline-block;
             transform: rotate(180deg);
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
         }
         
         .superscript {
             vertical-align: super;
             font-size: 0.8em;
-            font-family: inherit;
+            font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
         }
         
         .bold-text {
             font-weight: bold;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .italic-text {
             font-style: italic;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .serif-text {
@@ -732,7 +752,7 @@
                     case 'invisible-dots':
                         return `<span class="invisible-dots">${generateInvisibleDotsText(text)}</span>`;
                     case 'script':
-                        return `<span class="script">${text}</span>`; // Для русского просто применяем стиль
+                        return `<span class="script">${text}</span>`;
                     case 'bold':
                         return `<span class="bold-text">${text}</span>`;
                     case 'italic':
