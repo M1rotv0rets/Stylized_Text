@@ -148,7 +148,6 @@
             padding: 15px;
             border: 2px solid #4a5568;
             border-radius: 10px;
-            font-size: 1.1rem;
             background-color: rgba(26, 32, 44, 0.7);
             color: #e2e8f0;
             overflow: auto;
@@ -173,24 +172,9 @@
         }
         
         .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
             margin-bottom: 25px;
             animation: contentAppear 0.8s 0.9s ease-out forwards;
             opacity: 0;
-        }
-        
-        .options-section {
-            background: rgba(30, 30, 60, 0.6);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-        
-        .options-section:hover {
-            transform: translateY(-5px);
         }
         
         .section-title {
@@ -240,6 +224,13 @@
         .option:nth-child(11) { animation-delay: 2.0s; }
         .option:nth-child(12) { animation-delay: 2.1s; }
         .option:nth-child(13) { animation-delay: 2.2s; }
+        .option:nth-child(14) { animation-delay: 2.3s; }
+        .option:nth-child(15) { animation-delay: 2.4s; }
+        .option:nth-child(16) { animation-delay: 2.5s; }
+        .option:nth-child(17) { animation-delay: 2.6s; }
+        .option:nth-child(18) { animation-delay: 2.7s; }
+        .option:nth-child(19) { animation-delay: 2.8s; }
+        .option:nth-child(20) { animation-delay: 2.9s; }
         
         .option:hover {
             transform: translateY(-5px);
@@ -369,81 +360,9 @@
             transform: translateY(0);
         }
         
-        .info-text {
-            background: rgba(74, 29, 109, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: #cbd5e0;
-            border-left: 4px solid #9f7aea;
-            animation: contentAppear 0.8s 1.5s ease-out forwards;
-            opacity: 0;
-        }
-        
-        /* Special styling for text types */
-        .fancy-bubble {
-            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
-            font-size: 1.5rem;
-            color: #6a11cb;
-        }
-        
-        .fancy-square {
-            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
+        .combining-text {
             font-size: 1.4rem;
-            color: #4a5568;
-        }
-        
-        .fancy-fraktur {
-            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
-            font-size: 1.5rem;
-        }
-        
-        .fancy-doublestruck {
-            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
-            font-size: 1.5rem;
-        }
-        
-        .fancy-script {
-            font-family: cursive;
-            font-size: 1.6rem;
-            color: #38ef7d;
-        }
-        
-        .fancy-boldscript {
-            font-family: cursive;
-            font-weight: bold;
-            font-size: 1.6rem;
-            color: #9f7aea;
-        }
-        
-        .fancy-upsidedown {
-            display: inline-block;
-            transform: rotate(180deg);
-            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
-        }
-        
-        .fancy-superscript {
-            font-size: 0.8em;
-            vertical-align: super;
-            font-family: inherit;
-        }
-        
-        .fancy-monospace {
-            font-family: monospace;
-            font-size: 1.4rem;
-        }
-        
-        .fancy-invisible {
-            letter-spacing: 0.3em;
-            color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .fancy-dotted {
-            color: #9f7aea;
-            letter-spacing: 3px;
-            font-size: 1.4rem;
-            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
+            line-height: 1.8;
         }
         
         @media (max-width: 768px) {
@@ -475,127 +394,97 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-wand-magic-sparkles floating floating-1"></i> Генератор стилизованного текста</h1>
-            <div class="subtitle">Преобразуйте ваш текст в 25+ стилей с поддержкой Unicode</div>
+            <div class="subtitle">Преобразуйте текст в 20+ стилей с поддержкой Unicode</div>
         </header>
         
         <div class="main-content">
             <div class="input-group">
-                <label for="inputText"><i class="fas fa-pen floating floating-2"></i> Введите ваш текст:</label>
-                <textarea id="inputText" placeholder="Введите текст для преобразования...">fancy text</textarea>
+                <label for="inputText"><i class="fas fa-pen floating floating-2"></i> Введите текст:</label>
+                <textarea id="inputText" placeholder="Введите текст для преобразования...">Пример стилизованного текста</textarea>
             </div>
             
             <div class="options-container">
-                <div class="options-section">
-                    <div class="section-title"><i class="fas fa-brush floating floating-3"></i> Основные стили</div>
-                    <div class="options">
-                        <div class="option" data-type="bubble">
-                            <div class="option-title">🅵🅰️🅽🅲🆈 🆃🅴🆇🆃</div>
-                            <div class="option-preview">Bubble Text</div>
-                        </div>
-                        <div class="option" data-type="square">
-                            <div class="option-title">🄵🄰🄽🄲🅈 🅃🄴🅇🅃</div>
-                            <div class="option-preview">Squared Text</div>
-                        </div>
-                        <div class="option" data-type="fraktur">
-                            <div class="option-title">𝔣𝔞𝔫𝔠𝔶 𝔱𝔢𝔵𝔱</div>
-                            <div class="option-preview">Fraktur</div>
-                        </div>
-                        <div class="option" data-type="boldfraktur">
-                            <div class="option-title">𝖋𝖆𝖓𝖈𝖞 𝖙𝖊𝖝𝖙</div>
-                            <div class="option-preview">Bold Fraktur</div>
-                        </div>
-                        <div class="option" data-type="doublestruck">
-                            <div class="option-title">𝕗𝕒𝕟𝕔𝕪 𝕥𝕖𝕩𝕥</div>
-                            <div class="option-preview">Double-Struck</div>
-                        </div>
-                        <div class="option" data-type="smallcaps">
-                            <div class="option-title">ꜰᴀɴᴄʏ ᴛᴇxᴛ</div>
-                            <div class="option-preview">Small Caps</div>
-                        </div>
-                        <div class="option" data-type="circled">
-                            <div class="option-title">ⓕⓐⓝⓒⓨ ⓣⓔⓧⓣ</div>
-                            <div class="option-preview">Circled</div>
-                        </div>
-                        <div class="option" data-type="script">
-                            <div class="option-title">𝒻𝒶𝓃𝒸𝓎 𝓉𝑒𝓍𝓉</div>
-                            <div class="option-preview">Script</div>
-                        </div>
+                <div class="section-title"><i class="fas fa-brush floating floating-3"></i> Все стили текста:</div>
+                <div class="options">
+                    <div class="option" data-type="strike">
+                        <div class="option-title">Зачеркнутый</div>
+                        <div class="option-preview">̶З̶а̶ч̶е̶р̶к̶н̶у̶т̶ы̶й̶</div>
                     </div>
-                </div>
-                
-                <div class="options-section">
-                    <div class="section-title"><i class="fas fa-star floating floating-1"></i> Расширенные стили</div>
-                    <div class="options">
-                        <div class="option" data-type="boldscript">
-                            <div class="option-title">𝓯𝓪𝓷𝓬𝔂 𝓽𝓮𝔁𝓽</div>
-                            <div class="option-preview">Bold Script</div>
-                        </div>
-                        <div class="option" data-type="upsidedown">
-                            <div class="option-title">ɟɐuɔʎ ʇǝxʇ</div>
-                            <div class="option-preview">Upside Down</div>
-                        </div>
-                        <div class="option" data-type="reversed">
-                            <div class="option-title">ʇxǝʇ ʎɔuɐɟ</div>
-                            <div class="option-preview">Reversed</div>
-                        </div>
-                        <div class="option" data-type="boldsans">
-                            <div class="option-title">𝗳𝗮𝗻𝗰𝘆 𝘁𝗲𝘅𝘁</div>
-                            <div class="option-preview">Bold Sans</div>
-                        </div>
-                        <div class="option" data-type="bold">
-                            <div class="option-title">𝐟𝐚𝐧𝐜𝐲 𝐭𝐞𝐱𝐭</div>
-                            <div class="option-preview">Bold</div>
-                        </div>
-                        <div class="option" data-type="italic">
-                            <div class="option-title">𝙛𝙖𝙣𝙘𝙮 𝙩𝙚𝙭𝙩</div>
-                            <div class="option-preview">Italic</div>
-                        </div>
-                        <div class="option" data-type="bolditalic">
-                            <div class="option-title">𝒇𝒂𝒏𝒄𝒚 𝒕𝒆𝒙𝒕</div>
-                            <div class="option-preview">Bold Italic</div>
-                        </div>
-                        <div class="option" data-type="monospace">
-                            <div class="option-title">𝚏𝚊𝚗𝚌𝚢 𝚝𝚎𝚡𝚝</div>
-                            <div class="option-preview">Monospace</div>
-                        </div>
+                    <div class="option" data-type="slash">
+                        <div class="option-title">Символ слеш</div>
+                        <div class="option-preview">̷с̷и̷м̷в̷о̷л̷ ̷с̷л̷э̷ш̷</div>
                     </div>
-                </div>
-                
-                <div class="options-section">
-                    <div class="section-title"><i class="fas fa-magic floating floating-2"></i> Специальные стили</div>
-                    <div class="options">
-                        <div class="option" data-type="sansserif">
-                            <div class="option-title">𝘧𝘢𝘯𝘤𝘺 𝘵𝘦𝘹𝘵</div>
-                            <div class="option-preview">Sans Serif</div>
-                        </div>
-                        <div class="option" data-type="italicsans">
-                            <div class="option-title">𝑓𝑎𝑛𝑐𝑦 𝑡𝑒𝑥𝑡</div>
-                            <div class="option-preview">Italic Sans</div>
-                        </div>
-                        <div class="option" data-type="invisible">
-                            <div class="option-title">‌f‌a‌n‌c‌y‌ ‌t‌e‌x‌t‌</div>
-                            <div class="option-preview">Invisible</div>
-                        </div>
-                        <div class="option" data-type="dotted">
-                            <div class="option-title">҉f҉a҉n҉c҉y҉ ҉t҉e҉x҉t҉</div>
-                            <div class="option-preview">Dotted</div>
-                        </div>
-                        <div class="option" data-type="messy">
-                            <div class="option-title">f҈a҈n҈c҈y҈ t҈e҈x҈t҈</div>
-                            <div class="option-preview">Messy</div>
-                        </div>
-                        <div class="option" data-type="doubleinvisible">
-                            <div class="option-title">f‌‌a‌‌n‌‌c‌‌y‌‌ ‌‌t‌‌e‌‌x‌‌t‌‌</div>
-                            <div class="option-preview">Double Invisible</div>
-                        </div>
-                        <div class="option" data-type="superscript">
-                            <div class="option-title">ᶠᵃⁿᶜʸ ᵗᵉˣᵗ</div>
-                            <div class="option-preview">Superscript</div>
-                        </div>
-                        <div class="option" data-type="strikethrough">
-                            <div class="option-title">S̶t̶r̶i̶k̶e̶</div>
-                            <div class="option-preview">Strikethrough</div>
-                        </div>
+                    <div class="option" data-type="underline">
+                        <div class="option-title">Подчеркнутый</div>
+                        <div class="option-preview">͟П͟о͟д͟ч͟е͟р͟к͟н͟у͟т͟ы͟й͟</div>
+                    </div>
+                    <div class="option" data-type="double">
+                        <div class="option-title">Двойное подчеркивание</div>
+                        <div class="option-preview">͇д͇в͇о͇й͇н͇о͇е͇ ͇п͇о͇д͇ч͇е͇р͇к͇и͇в͇а͇н͇и͇е͇</div>
+                    </div>
+                    <div class="option" data-type="dotted">
+                        <div class="option-title">Пунктирная линия</div>
+                        <div class="option-preview">̤п̤у̤н̤к̤т̤и̤р̤н̤а̤я̤ ̤л̤и̤н̤и̤я̤</div>
+                    </div>
+                    <div class="option" data-type="wave">
+                        <div class="option-title">Волна линий</div>
+                        <div class="option-preview">̰в̰о̰л̰н̰а̰ ̰л̰и̰н̰и̰я̰</div>
+                    </div>
+                    <div class="option" data-type="zalgo">
+                        <div class="option-title">Zalgo</div>
+                        <div class="option-preview">Z̷͇͑a̵̡͝l̶̳͝ǵ̶͕o̷̘̿</div>
+                    </div>
+                    <div class="option" data-type="invisible-dots">
+                        <div class="option-title">Текст с разделителями</div>
+                        <div class="option-preview">f҉a҉n҉c҉y҉</div>
+                    </div>
+                    <div class="option" data-type="fancy-bubble">
+                        <div class="option-title">Пузырьковый</div>
+                        <div class="option-preview">🅵🅰️🅽🅲🆈 🆃🅴🆇🆃</div>
+                    </div>
+                    <div class="option" data-type="fancy-square">
+                        <div class="option-title">Квадратный</div>
+                        <div class="option-preview">🄵🄰🄽🄲🅈 🅃🄴🅇🅃</div>
+                    </div>
+                    <div class="option" data-type="fancy-fraktur">
+                        <div class="option-title">Готический</div>
+                        <div class="option-preview">𝔣𝔞𝔫𝔠𝔶 𝔱𝔢𝔵𝔱</div>
+                    </div>
+                    <div class="option" data-type="fancy-doublestruck">
+                        <div class="option-title">Двойной контур</div>
+                        <div class="option-preview">𝕗𝕒𝕟𝕔𝕪 𝕥𝕖𝕩𝕥</div>
+                    </div>
+                    <div class="option" data-type="fancy-smallcaps">
+                        <div class="option-title">Малые прописные</div>
+                        <div class="option-preview">ꜰᴀɴᴄʏ ᴛᴇxᴛ</div>
+                    </div>
+                    <div class="option" data-type="fancy-circled">
+                        <div class="option-title">В кружках</div>
+                        <div class="option-preview">ⓕⓐⓝⓒⓨ ⓣⓔⓧⓣ</div>
+                    </div>
+                    <div class="option" data-type="fancy-script">
+                        <div class="option-title">Рукописный</div>
+                        <div class="option-preview">𝒻𝒶𝓃𝒸𝓎 𝓉𝑒𝓍𝓉</div>
+                    </div>
+                    <div class="option" data-type="fancy-boldscript">
+                        <div class="option-title">Жирный рукописный</div>
+                        <div class="option-preview">𝓯𝓪𝓷𝓬𝔂 𝓽𝓮𝔁𝓽</div>
+                    </div>
+                    <div class="option" data-type="fancy-upsidedown">
+                        <div class="option-title">Перевернутый</div>
+                        <div class="option-preview">ɟɐuɔʎ ʇǝxʇ</div>
+                    </div>
+                    <div class="option" data-type="fancy-bold">
+                        <div class="option-title">Жирный</div>
+                        <div class="option-preview">𝐟𝐚𝐧𝐜𝐲 𝐭𝐞𝐱𝐭</div>
+                    </div>
+                    <div class="option" data-type="fancy-italic">
+                        <div class="option-title">Курсив</div>
+                        <div class="option-preview">𝙛𝙖𝙣𝙘𝙮 𝙩𝙚𝙭𝙩</div>
+                    </div>
+                    <div class="option" data-type="fancy-superscript">
+                        <div class="option-title">Надстрочный</div>
+                        <div class="option-preview">ᶠᵃⁿᶜʸ ᵗᵉˣᵗ</div>
                     </div>
                 </div>
             </div>
@@ -616,10 +505,6 @@
                     <i class="fas fa-check-circle"></i> Скопировано в буфер обмена!
                 </div>
             </div>
-            
-            <div class="info-text">
-                <p><i class="fas fa-lightbulb"></i> Советы: Для некоторых стилей может потребоваться поддержка Unicode. Если текст отображается некорректно, попробуйте другой шрифт или браузер.</p>
-            </div>
         </div>
     </div>
 
@@ -632,7 +517,7 @@
             const copySuccess = document.getElementById('copySuccess');
             const options = document.querySelectorAll('.option');
             
-            let selectedOption = 'bubble';
+            let selectedOption = 'strike';
             
             // Выбор первого варианта по умолчанию
             options[0].classList.add('selected');
@@ -646,260 +531,156 @@
                 });
             });
             
-            // Карты преобразования для стилей
-            const styleMaps = {
-                // Основные стили
-                bubble: {
-                    'a': '🅐', 'b': '🅑', 'c': '🅒', 'd': '🅓', 'e': '🅔', 'f': '🅕', 'g': '🅖', 'h': '🅗', 
-                    'i': '🅘', 'j': '🅙', 'k': '🅚', 'l': '🅛', 'm': '🅜', 'n': '🅝', 'o': '🅞', 'p': '🅟', 
-                    'q': '🅠', 'r': '🅡', 's': '🅢', 't': '🅣', 'u': '🅤', 'v': '🅥', 'w': '🅦', 'x': '🅧', 
-                    'y': '🅨', 'z': '🅩', 
-                    'A': '🅐', 'B': '🅑', 'C': '🅒', 'D': '🅓', 'E': '🅔', 'F': '🅕', 'G': '🅖', 'H': '🅗', 
-                    'I': '🅘', 'J': '🅙', 'K': '🅚', 'L': '🅛', 'M': '🅜', 'N': '🅝', 'O': '🅞', 'P': '🅟', 
-                    'Q': '🅠', 'R': '🅡', 'S': '🅢', 'T': '🅣', 'U': '🅤', 'V': '🅥', 'W': '🅦', 'X': '🅧', 
-                    'Y': '🅨', 'Z': '🅩',
-                    ' ': ' ', '!': '❗', '?': '❓', '.': '⭑', ',': ','
-                },
-                square: {
-                    'a': '🄰', 'b': '🄱', 'c': '🄲', 'd': '🄳', 'e': '🄴', 'f': '🄵', 'g': '🄶', 'h': '🄷', 
-                    'i': '🄸', 'j': '🄹', 'k': '🄺', 'l': '🄻', 'm': '🄼', 'n': '🄽', 'o': '🄾', 'p': '🄿', 
-                    'q': '🅀', 'r': '🅁', 's': '🅂', 't': '🅃', 'u': '🅄', 'v': '🅅', 'w': '🅆', 'x': '🅇', 
-                    'y': '🅈', 'z': '🅉', 
-                    'A': '🄰', 'B': '🄱', 'C': '🄲', 'D': '🄳', 'E': '🄴', 'F': '🄵', 'G': '🄶', 'H': '🄷', 
-                    'I': '🄸', 'J': '🄹', 'K': '🄺', 'L': '🄻', 'M': '🄼', 'N': '🄽', 'O': '🄾', 'P': '🄿', 
-                    'Q': '🅀', 'R': '🅁', 'S': '🅂', 'T': '🅃', 'U': '🅄', 'V': '🅅', 'W': '🅆', 'X': '🅇', 
-                    'Y': '🅈', 'Z': '🅉',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                fraktur: {
-                    'a': '𝔞', 'b': '𝔟', 'c': '𝔠', 'd': '𝔡', 'e': '𝔢', 'f': '𝔣', 'g': '𝔤', 'h': '𝔥', 
-                    'i': '𝔦', 'j': '𝔧', 'k': '𝔨', 'l': '𝔩', 'm': '𝔪', 'n': '𝔫', 'o': '𝔬', 'p': '𝔭', 
-                    'q': '𝔮', 'r': '𝔯', 's': '𝔰', 't': '𝔱', 'u': '𝔲', 'v': '𝔳', 'w': '𝔴', 'x': '𝔵', 
-                    'y': '𝔶', 'z': '𝔷', 
-                    'A': '𝔄', 'B': '𝔅', 'C': 'ℭ', 'D': '𝔇', 'E': '𝔈', 'F': '𝔉', 'G': '𝔊', 'H': 'ℌ', 
-                    'I': 'ℑ', 'J': '𝔍', 'K': '𝔎', 'L': '𝔏', 'M': '𝔐', 'N': '𝔑', 'O': '𝔒', 'P': '𝔓', 
-                    'Q': '𝔔', 'R': 'ℜ', 'S': '𝔖', 'T': '𝔗', 'U': '𝔘', 'V': '𝔙', 'W': '𝔚', 'X': '𝔛', 
-                    'Y': '𝔜', 'Z': 'ℨ',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                boldfraktur: {
-                    'a': '𝖆', 'b': '𝖇', 'c': '𝖈', 'd': '𝖉', 'e': '𝖊', 'f': '𝖋', 'g': '𝖌', 'h': '𝖍', 
-                    'i': '𝖎', 'j': '𝖏', 'k': '𝖐', 'l': '𝖑', 'm': '𝖒', 'n': '𝖓', 'o': '𝖔', 'p': '𝖕', 
-                    'q': '𝖖', 'r': '𝖗', 's': '𝖘', 't': '𝖙', 'u': '𝖚', 'v': '𝖛', 'w': '𝖜', 'x': '𝖝', 
-                    'y': '𝖞', 'z': '𝖟', 
-                    'A': '𝕬', 'B': '𝕭', 'C': '𝕮', 'D': '𝕯', 'E': '𝕰', 'F': '𝕱', 'G': '𝕲', 'H': '𝕳', 
-                    'I': '𝕴', 'J': '𝕵', 'K': '𝕶', 'L': '𝕷', 'M': '𝕸', 'N': '𝕹', 'O': '𝕺', 'P': '𝕻', 
-                    'Q': '𝕼', 'R': '𝕽', 'S': '𝕾', 'T': '𝕿', 'U': '𝖀', 'V': '𝖁', 'W': '𝖂', 'X': '𝖃', 
-                    'Y': '𝖄', 'Z': '𝖅',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                doublestruck: {
-                    'a': '𝕒', 'b': '𝕓', 'c': '𝕔', 'd': '𝕕', 'e': '𝕖', 'f': '𝕗', 'g': '𝕘', 'h': '𝕙', 
-                    'i': '𝕚', 'j': '𝕛', 'k': '𝕜', 'l': '𝕝', 'm': '𝕞', 'n': '𝕟', 'o': '𝕠', 'p': '𝕡', 
-                    'q': '𝕢', 'r': '𝕣', 's': '𝕤', 't': '𝕥', 'u': '𝕦', 'v': '𝕧', 'w': '𝕨', 'x': '𝕩', 
-                    'y': '𝕪', 'z': '𝕫', 
-                    'A': '𝔸', 'B': '𝔹', 'C': 'ℂ', 'D': '𝔻', 'E': '𝔼', 'F': '𝔽', 'G': '𝔾', 'H': 'ℍ', 
-                    'I': '𝕀', 'J': '𝕁', 'K': '𝕂', 'L': '𝕃', 'M': '𝕄', 'N': 'ℕ', 'O': '𝕆', 'P': 'ℙ', 
-                    'Q': 'ℚ', 'R': 'ℝ', 'S': '𝕊', 'T': '𝕋', 'U': '𝕌', 'V': '𝕍', 'W': '𝕎', 'X': '𝕏', 
-                    'Y': '𝕐', 'Z': 'ℤ',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                smallcaps: {
-                    'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ғ', 'g': 'ɢ', 'h': 'ʜ', 
-                    'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ', 'o': 'ᴏ', 'p': 'ᴘ', 
-                    'q': 'ǫ', 'r': 'ʀ', 's': 's', 't': 'ᴛ', 'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 
-                    'y': 'ʏ', 'z': 'ᴢ', 
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                circled: {
-                    'a': 'ⓐ', 'b': 'ⓑ', 'c': 'ⓒ', 'd': 'ⓓ', 'e': 'ⓔ', 'f': 'ⓕ', 'g': 'ⓖ', 'h': 'ⓗ', 
-                    'i': 'ⓘ', 'j': 'ⓙ', 'k': 'ⓚ', 'l': 'ⓛ', 'm': 'ⓜ', 'n': 'ⓝ', 'o': 'ⓞ', 'p': 'ⓟ', 
-                    'q': 'ⓠ', 'r': 'ⓡ', 's': 'ⓢ', 't': 'ⓣ', 'u': 'ⓤ', 'v': 'ⓥ', 'w': 'ⓦ', 'x': 'ⓧ', 
-                    'y': 'ⓨ', 'z': 'ⓩ', 
-                    'A': 'Ⓐ', 'B': 'Ⓑ', 'C': 'Ⓒ', 'D': 'Ⓓ', 'E': 'Ⓔ', 'F': 'Ⓕ', 'G': 'Ⓖ', 'H': 'Ⓗ', 
-                    'I': 'Ⓘ', 'J': 'Ⓙ', 'K': 'Ⓚ', 'L': 'Ⓛ', 'M': 'Ⓜ', 'N': 'Ⓝ', 'O': 'Ⓞ', 'P': 'Ⓟ', 
-                    'Q': 'Ⓠ', 'R': 'Ⓡ', 'S': 'Ⓢ', 'T': 'Ⓣ', 'U': 'Ⓤ', 'V': 'Ⓥ', 'W': 'Ⓦ', 'X': 'Ⓧ', 
-                    'Y': 'Ⓨ', 'Z': 'Ⓩ',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                script: {
-                    'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': 'ℯ', 'f': '𝒻', 'g': 'ℊ', 'h': '𝒽', 
-                    'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': 'ℴ', 'p': '𝓅', 
-                    'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 
-                    'y': '𝓎', 'z': '𝓏', 
-                    'A': '𝒜', 'B': 'ℬ', 'C': '𝒞', 'D': '𝒟', 'E': 'ℰ', 'F': 'ℱ', 'G': '𝒢', 'H': 'ℋ', 
-                    'I': 'ℐ', 'J': '𝒥', 'K': '𝒦', 'L': 'ℒ', 'M': 'ℳ', 'N': '𝒩', 'O': '𝒪', 'P': '𝒫', 
-                    'Q': '𝒬', 'R': 'ℛ', 'S': '𝒮', 'T': '𝒯', 'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 
-                    'Y': '𝒴', 'Z': '𝒵',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                
-                // Расширенные стили
-                boldscript: {
-                    'a': '𝓪', 'b': '𝓫', 'c': '𝓬', 'd': '𝓭', 'e': '𝓮', 'f': '𝓯', 'g': '𝓰', 'h': '𝓱', 
-                    'i': '𝓲', 'j': '𝓳', 'k': '𝓴', 'l': '𝓵', 'm': '𝓶', 'n': '𝓷', 'o': '𝓸', 'p': '𝓹', 
-                    'q': '𝓺', 'r': '𝓻', 's': '𝓼', 't': '𝓽', 'u': '𝓾', 'v': '𝓿', 'w': '𝔀', 'x': '𝔁', 
-                    'y': '𝔂', 'z': '𝔃', 
-                    'A': '𝓐', 'B': '𝓑', 'C': '𝓒', 'D': '𝓓', 'E': '𝓔', 'F': '𝓕', 'G': '𝓖', 'H': '𝓗', 
-                    'I': '𝓘', 'J': '𝓙', 'K': '𝓚', 'L': '𝓛', 'M': '𝓜', 'N': '𝓝', 'O': '𝓞', 'P': '𝓟', 
-                    'Q': '𝓠', 'R': '𝓡', 'S': '𝓢', 'T': '𝓣', 'U': '𝓤', 'V': '𝓥', 'W': '𝓦', 'X': '𝓧', 
-                    'Y': '𝓨', 'Z': '𝓩',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                upsidedown: {
-                    'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ', 'h': 'ɥ', 
-                    'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u', 'o': 'o', 'p': 'd', 
-                    'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n', 'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 
-                    'y': 'ʎ', 'z': 'z', 
-                    'A': '∀', 'B': '𐐒', 'C': 'Ↄ', 'D': '◖', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': '⅁', 'H': 'H', 
-                    'I': 'I', 'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N', 'O': 'O', 'P': 'Ԁ', 
-                    'Q': 'Ό', 'R': 'ᴚ', 'S': 'S', 'T': '⊥', 'U': '∩', 'V': 'Λ', 'W': 'M', 'X': 'X', 
-                    'Y': '⅄', 'Z': 'Z',
-                    '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', 
-                    '8': '8', '9': '6', '.': '˙', ',': '\'', '\'': ',', '"': ',,', '`': ',', 
-                    '?': '¿', '!': '¡', '&': '⅋', '_': '‾', '(': ')', ')': '(', '[': ']', ']': '[', 
-                    '{': '}', '}': '{', '<': '>', '>': '<', ' ': ' '
-                },
-                reversed: {
-                    'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ', 'h': 'ɥ', 
-                    'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u', 'o': 'o', 'p': 'd', 
-                    'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n', 'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 
-                    'y': 'ʎ', 'z': 'z', 
-                    'A': '∀', 'B': '𐐒', 'C': 'Ↄ', 'D': '◖', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': '⅁', 'H': 'H', 
-                    'I': 'I', 'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N', 'O': 'O', 'P': 'Ԁ', 
-                    'Q': 'Ό', 'R': 'ᴚ', 'S': 'S', 'T': '⊥', 'U': '∩', 'V': 'Λ', 'W': 'M', 'X': 'X', 
-                    'Y': '⅄', 'Z': 'Z',
-                    '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', 
-                    '8': '8', '9': '6', '.': '˙', ',': '\'', '\'': ',', '"': ',,', '`': ',', 
-                    '?': '¿', '!': '¡', '&': '⅋', '_': '‾', '(': ')', ')': '(', '[': ']', ']': '[', 
-                    '{': '}', '}': '{', '<': '>', '>': '<', ' ': ' '
-                },
-                boldsans: {
-                    'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳', 'g': '𝗴', 'h': '𝗵', 
-                    'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻', 'o': '𝗼', 'p': '𝗽', 
-                    'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂', 'v': '𝘃', 'w': '𝘄', 'x': '𝘅', 
-                    'y': '𝘆', 'z': '𝘇', 
-                    'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚', 'H': '𝗛', 
-                    'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡', 'O': '𝗢', 'P': '𝗣', 
-                    'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨', 'V': '𝗩', 'W': '𝗪', 'X': '𝗫', 
-                    'Y': '𝗬', 'Z': '𝗭',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                bold: {
-                    'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 
-                    'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 
-                    'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 
-                    'y': '𝐲', 'z': '𝐳', 
-                    'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 
-                    'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 
-                    'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 
-                    'Y': '𝐘', 'Z': '𝐙',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                italic: {
-                    'a': '𝙖', 'b': '𝙗', 'c': '𝙘', 'd': '𝙙', 'e': '𝙚', 'f': '𝙛', 'g': '𝙜', 'h': '𝙝', 
-                    'i': '𝙞', 'j': '𝙟', 'k': '𝙠', 'l': '𝙡', 'm': '𝙢', 'n': '𝙣', 'o': '𝙤', 'p': '𝙥', 
-                    'q': '𝙦', 'r': '𝙧', 's': '𝙨', 't': '𝙩', 'u': '𝙪', 'v': '𝙫', 'w': '𝙬', 'x': '𝙭', 
-                    'y': '𝙮', 'z': '𝙯', 
-                    'A': '𝘼', 'B': '𝘽', 'C': '𝘾', 'D': '𝘿', 'E': '𝙀', 'F': '𝙁', 'G': '𝙂', 'H': '𝙃', 
-                    'I': '𝙄', 'J': '𝙅', 'K': '𝙆', 'L': '𝙇', 'M': '𝙈', 'N': '𝙉', 'O': '𝙊', 'P': '𝙋', 
-                    'Q': '𝙌', 'R': '𝙍', 'S': '𝙎', 'T': '𝙏', 'U': '𝙐', 'V': '𝙑', 'W': '𝙒', 'X': '𝙓', 
-                    'Y': '𝙔', 'Z': '𝙕',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                bolditalic: {
-                    'a': '𝒂', 'b': '𝒃', 'c': '𝒄', 'd': '𝒅', 'e': '𝒆', 'f': '𝒇', 'g': '𝒈', 'h': '𝒉', 
-                    'i': '𝒊', 'j': '𝒋', 'k': '𝒌', 'l': '𝒍', 'm': '𝒎', 'n': '𝒏', 'o': '𝒐', 'p': '𝒑', 
-                    'q': '𝒒', 'r': '𝒓', 's': '𝒔', 't': '𝒕', 'u': '𝒖', 'v': '𝒗', 'w': '𝒘', 'x': '𝒙', 
-                    'y': '𝒚', 'z': '𝒛', 
-                    'A': '𝑨', 'B': '𝑩', 'C': '𝑪', 'D': '𝑫', 'E': '𝑬', 'F': '𝑭', 'G': '𝑮', 'H': '𝑯', 
-                    'I': '𝑰', 'J': '𝑱', 'K': '𝑲', 'L': '𝑳', 'M': '𝑴', 'N': '𝑵', 'O': '𝑶', 'P': '𝑷', 
-                    'Q': '𝑸', 'R': '𝑹', 'S': '𝑺', 'T': '𝑻', 'U': '𝑼', 'V': '𝑽', 'W': '𝑾', 'X': '𝑿', 
-                    'Y': '𝒀', 'Z': '𝒁',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                monospace: {
-                    'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 
-                    'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 
-                    'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 
-                    'y': '𝚢', 'z': '𝚣', 
-                    'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴', 'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 
-                    'I': '𝙸', 'J': '𝙹', 'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾', 'P': '𝙿', 
-                    'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃', 'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 
-                    'Y': '𝚈', 'Z': '𝚉',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                
-                // Специальные стили
-                sansserif: {
-                    'a': '𝖺', 'b': '𝖻', 'c': '𝖼', 'd': '𝖽', 'e': '𝖾', 'f': '𝖿', 'g': '𝗀', 'h': '𝗁', 
-                    'i': '𝗂', 'j': '𝗃', 'k': '𝗄', 'l': '𝗅', 'm': '𝗆', 'n': '𝗇', 'o': '𝗈', 'p': '𝗉', 
-                    'q': '𝗊', 'r': '𝗋', 's': '𝗌', 't': '𝗍', 'u': '𝗎', 'v': '𝗏', 'w': '𝗐', 'x': '𝗑', 
-                    'y': '𝗒', 'z': '𝗓', 
-                    'A': '𝖠', 'B': '𝖡', 'C': '𝖢', 'D': '𝖣', 'E': '𝖤', 'F': '𝖥', 'G': '𝖦', 'H': '𝖧', 
-                    'I': '𝖨', 'J': '𝖩', 'K': '𝖪', 'L': '𝖫', 'M': '𝖬', 'N': '𝖭', 'O': '𝖮', 'P': '𝖯', 
-                    'Q': '𝖰', 'R': '𝖱', 'S': '𝖲', 'T': '𝖳', 'U': '𝖴', 'V': '𝖵', 'W': '𝖶', 'X': '𝖷', 
-                    'Y': '𝖸', 'Z': '𝖹',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                italicsans: {
-                    'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 
-                    'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 
-                    'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 
-                    'y': '𝘺', 'z': '𝘻', 
-                    'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 
-                    'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 
-                    'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 
-                    'Y': '𝘠', 'Z': '𝘡',
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                invisible: {
-                    'a': 'a‌', 'b': 'b‌', 'c': 'c‌', 'd': 'd‌', 'e': 'e‌', 'f': 'f‌', 'g': 'g‌', 'h': 'h‌', 
-                    'i': 'i‌', 'j': 'j‌', 'k': 'k‌', 'l': 'l‌', 'm': 'm‌', 'n': 'n‌', 'o': 'o‌', 'p': 'p‌', 
-                    'q': 'q‌', 'r': 'r‌', 's': 's‌', 't': 't‌', 'u': 'u‌', 'v': 'v‌', 'w': 'w‌', 'x': 'x‌', 
-                    'y': 'y‌', 'z': 'z‌', 
-                    ' ': '‌‌', '!': '!‌', '?': '?‌', '.': '.‌', ',': ',‌'
-                },
-                dotted: {
-                    'a': 'a҉', 'b': 'b҉', 'c': 'c҉', 'd': 'd҉', 'e': 'e҉', 'f': 'f҉', 'g': 'g҉', 'h': 'h҉', 
-                    'i': 'i҉', 'j': 'j҉', 'k': 'k҉', 'l': 'l҉', 'm': 'm҉', 'n': 'n҉', 'o': 'o҉', 'p': 'p҉', 
-                    'q': 'q҉', 'r': 'r҉', 's': 's҉', 't': 't҉', 'u': 'u҉', 'v': 'v҉', 'w': 'w҉', 'x': 'x҉', 
-                    'y': 'y҉', 'z': 'z҉', 
-                    ' ': '҉', '!': '!҉', '?': '?҉', '.': '.҉', ',': ',҉'
-                },
-                messy: {
-                    'a': 'a҈', 'b': 'b҈', 'c': 'c҈', 'd': 'd҈', 'e': 'e҈', 'f': 'f҈', 'g': 'g҈', 'h': 'h҈', 
-                    'i': 'i҈', 'j': 'j҈', 'k': 'k҈', 'l': 'l҈', 'm': 'm҈', 'n': 'n҈', 'o': 'o҈', 'p': 'p҈', 
-                    'q': 'q҈', 'r': 'r҈', 's': 's҈', 't': 't҈', 'u': 'u҈', 'v': 'v҈', 'w': 'w҈', 'x': 'x҈', 
-                    'y': 'y҈', 'z': 'z҈', 
-                    ' ': '҈', '!': '!҈', '?': '?҈', '.': '.҈', ',': ',҈'
-                },
-                doubleinvisible: {
-                    'a': 'a‌‌', 'b': 'b‌‌', 'c': 'c‌‌', 'd': 'd‌‌', 'e': 'e‌‌', 'f': 'f‌‌', 'g': 'g‌‌', 'h': 'h‌‌', 
-                    'i': 'i‌‌', 'j': 'j‌‌', 'k': 'k‌‌', 'l': 'l‌‌', 'm': 'm‌‌', 'n': 'n‌‌', 'o': 'o‌‌', 'p': 'p‌‌', 
-                    'q': 'q‌‌', 'r': 'r‌‌', 's': 's‌‌', 't': 't‌‌', 'u': 'u‌‌', 'v': 'v‌‌', 'w': 'w‌‌', 'x': 'x‌‌', 
-                    'y': 'y‌‌', 'z': 'z‌‌', 
-                    ' ': '‌‌', '!': '!‌‌', '?': '?‌‌', '.': '.‌‌', ',': ',‌‌'
-                },
-                superscript: {
-                    'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 'e': 'ᵉ', 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 
-                    'i': 'ⁱ', 'j': 'ʲ', 'k': 'ᵏ', 'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ', 'p': 'ᵖ', 
-                    'q': 'ᑫ', 'r': 'ʳ', 's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ', 'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 
-                    'y': 'ʸ', 'z': 'ᶻ', 
-                    ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
-                },
-                strikethrough: {
-                    'a': 'a̶', 'b': 'b̶', 'c': 'c̶', 'd': 'd̶', 'e': 'e̶', 'f': 'f̶', 'g': 'g̶', 'h': 'h̶', 
-                    'i': 'i̶', 'j': 'j̶', 'k': 'k̶', 'l': 'l̶', 'm': 'm̶', 'n': 'n̶', 'o': 'o̶', 'p': 'p̶', 
-                    'q': 'q̶', 'r': 'r̶', 's': 's̶', 't': 't̶', 'u': 'u̶', 'v': 'v̶', 'w': 'w̶', 'x': 'x̶', 
-                    'y': 'y̶', 'z': 'z̶', 
-                    ' ': '̶', '!': '!̶', '?': '?̶', '.': '.̶', ',': ',̶'
-                }
-            };
-            
             // Основная функция генерации стилизованного текста
             function generateText(text, type) {
                 if (!text.trim()) return '';
+                
+                // Эффекты с комбинирующими символами
+                if (type === 'strike' || type === 'slash' || type === 'underline' || 
+                    type === 'double' || type === 'dotted' || type === 'wave') {
+                    return applyCombiningEffect(text, type);
+                }
+                
+                // Специальные эффекты
+                if (type === 'zalgo') {
+                    return '<span class="combining-text">' + generateZalgoText(text) + '</span>';
+                }
+                
+                if (type === 'invisible-dots') {
+                    return '<span class="combining-text">' + generateInvisibleDotsText(text) + '</span>';
+                }
+                
+                // Карты преобразования для стилей
+                const styleMaps = {
+                    // Основные стили
+                    'fancy-bubble': {
+                        'a': '🅐', 'b': '🅑', 'c': '🅒', 'd': '🅓', 'e': '🅔', 'f': '🅕', 'g': '🅖', 'h': '🅗', 
+                        'i': '🅘', 'j': '🅙', 'k': '🅚', 'l': '🅛', 'm': '🅜', 'n': '🅝', 'o': '🅞', 'p': '🅟', 
+                        'q': '🅠', 'r': '🅡', 's': '🅢', 't': '🅣', 'u': '🅤', 'v': '🅥', 'w': '🅦', 'x': '🅧', 
+                        'y': '🅨', 'z': '🅩', 
+                        'A': '🅐', 'B': '🅑', 'C': '🅒', 'D': '🅓', 'E': '🅔', 'F': '🅕', 'G': '🅖', 'H': '🅗', 
+                        'I': '🅘', 'J': '🅙', 'K': '🅚', 'L': '🅛', 'M': '🅜', 'N': '🅝', 'O': '🅞', 'P': '🅟', 
+                        'Q': '🅠', 'R': '🅡', 'S': '🅢', 'T': '🅣', 'U': '🅤', 'V': '🅥', 'W': '🅦', 'X': '🅧', 
+                        'Y': '🅨', 'Z': '🅩',
+                        ' ': ' ', '!': '❗', '?': '❓', '.': '⭑', ',': ','
+                    },
+                    'fancy-square': {
+                        'a': '🄰', 'b': '🄱', 'c': '🄲', 'd': '🄳', 'e': '🄴', 'f': '🄵', 'g': '🄶', 'h': '🄷', 
+                        'i': '🄸', 'j': '🄹', 'k': '🄺', 'l': '🄻', 'm': '🄼', 'n': '🄽', 'o': '🄾', 'p': '🄿', 
+                        'q': '🅀', 'r': '🅁', 's': '🅂', 't': '🅃', 'u': '🅄', 'v': '🅅', 'w': '🅆', 'x': '🅇', 
+                        'y': '🅈', 'z': '🅉', 
+                        'A': '🄰', 'B': '🄱', 'C': '🄲', 'D': '🄳', 'E': '🄴', 'F': '🄵', 'G': '🄶', 'H': '🄷', 
+                        'I': '🄸', 'J': '🄹', 'K': '🄺', 'L': '🄻', 'M': '🄼', 'N': '🄽', 'O': '🄾', 'P': '🄿', 
+                        'Q': '🅀', 'R': '🅁', 'S': '🅂', 'T': '🅃', 'U': '🅄', 'V': '🅅', 'W': '🅆', 'X': '🅇', 
+                        'Y': '🅈', 'Z': '🅉',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-fraktur': {
+                        'a': '𝔞', 'b': '𝔟', 'c': '𝔠', 'd': '𝔡', 'e': '𝔢', 'f': '𝔣', 'g': '𝔤', 'h': '𝔥', 
+                        'i': '𝔦', 'j': '𝔧', 'k': '𝔨', 'l': '𝔩', 'm': '𝔪', 'n': '𝔫', 'o': '𝔬', 'p': '𝔭', 
+                        'q': '𝔮', 'r': '𝔯', 's': '𝔰', 't': '𝔱', 'u': '𝔲', 'v': '𝔳', 'w': '𝔴', 'x': '𝔵', 
+                        'y': '𝔶', 'z': '𝔷', 
+                        'A': '𝔄', 'B': '𝔅', 'C': 'ℭ', 'D': '𝔇', 'E': '𝔈', 'F': '𝔉', 'G': '𝔊', 'H': 'ℌ', 
+                        'I': 'ℑ', 'J': '𝔍', 'K': '𝔎', 'L': 'ℒ', 'M': '𝔐', 'N': '𝔑', 'O': '𝔒', 'P': '𝔓', 
+                        'Q': '𝔔', 'R': 'ℜ', 'S': '𝔖', 'T': '𝔗', 'U': '𝔘', 'V': '𝔙', 'W': '𝔚', 'X': '𝔛', 
+                        'Y': '𝔜', 'Z': 'ℨ',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-doublestruck': {
+                        'a': '𝕒', 'b': '𝕓', 'c': '𝕔', 'd': '𝕕', 'e': '𝕖', 'f': '𝕗', 'g': '𝕘', 'h': '𝕙', 
+                        'i': '𝕚', 'j': '𝕛', 'k': '𝕜', 'l': '𝕝', 'm': '𝕞', 'n': '𝕟', 'o': '𝕠', 'p': '𝕡', 
+                        'q': '𝕢', 'r': '𝕣', 's': '𝕤', 't': '𝕥', 'u': '𝕦', 'v': '𝕧', 'w': '𝕨', 'x': '𝕩', 
+                        'y': '𝕪', 'z': '𝕫', 
+                        'A': '𝔸', 'B': '𝔹', 'C': 'ℂ', 'D': '𝔻', 'E': '𝔼', 'F': '𝔽', 'G': '𝔾', 'H': 'ℍ', 
+                        'I': '𝕀', 'J': '𝕁', 'K': '𝕂', 'L': '𝕃', 'M': '𝕄', 'N': 'ℕ', 'O': '𝕆', 'P': 'ℙ', 
+                        'Q': 'ℚ', 'R': 'ℝ', 'S': '𝕊', 'T': '𝕋', 'U': '𝕌', 'V': '𝕍', 'W': '𝕎', 'X': '𝕏', 
+                        'Y': '𝕐', 'Z': 'ℤ',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-smallcaps': {
+                        'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ғ', 'g': 'ɢ', 'h': 'ʜ', 
+                        'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ', 'o': 'ᴏ', 'p': 'ᴘ', 
+                        'q': 'ǫ', 'r': 'ʀ', 's': 's', 't': 'ᴛ', 'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 
+                        'y': 'ʏ', 'z': 'ᴢ', 
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-circled': {
+                        'a': 'ⓐ', 'b': 'ⓑ', 'c': 'ⓒ', 'd': 'ⓓ', 'e': 'ⓔ', 'f': 'ⓕ', 'g': 'ⓖ', 'h': 'ⓗ', 
+                        'i': 'ⓘ', 'j': 'ⓙ', 'k': 'ⓚ', 'l': 'ⓛ', 'm': 'ⓜ', 'n': 'ⓝ', 'o': 'ⓞ', 'p': 'ⓟ', 
+                        'q': 'ⓠ', 'r': 'ⓡ', 's': 'ⓢ', 't': 'ⓣ', 'u': 'ⓤ', 'v': 'ⓥ', 'w': 'ⓦ', 'x': 'ⓧ', 
+                        'y': 'ⓨ', 'z': 'ⓩ', 
+                        'A': 'Ⓐ', 'B': 'Ⓑ', 'C': 'Ⓒ', 'D': 'Ⓓ', 'E': 'Ⓔ', 'F': 'Ⓕ', 'G': 'Ⓖ', 'H': 'Ⓗ', 
+                        'I': 'Ⓘ', 'J': 'Ⓙ', 'K': 'Ⓚ', 'L': 'Ⓛ', 'M': 'Ⓜ', 'N': 'Ⓝ', 'O': 'Ⓞ', 'P': 'Ⓟ', 
+                        'Q': 'Ⓠ', 'R': 'Ⓡ', 'S': 'Ⓢ', 'T': 'Ⓣ', 'U': 'Ⓤ', 'V': 'Ⓥ', 'W': 'Ⓦ', 'X': 'Ⓧ', 
+                        'Y': 'Ⓨ', 'Z': 'Ⓩ',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-script': {
+                        'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': 'ℯ', 'f': '𝒻', 'g': 'ℊ', 'h': '𝒽', 
+                        'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': 'ℴ', 'p': '𝓅', 
+                        'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 
+                        'y': '𝓎', 'z': '𝓏', 
+                        'A': '𝒜', 'B': 'ℬ', 'C': '𝒞', 'D': '𝒟', 'E': 'ℰ', 'F': 'ℱ', 'G': '𝒢', 'H': 'ℋ', 
+                        'I': 'ℐ', 'J': '𝒥', 'K': '𝒦', 'L': 'ℒ', 'M': 'ℳ', 'N': '𝒩', 'O': '𝒪', 'P': '𝒫', 
+                        'Q': '𝒬', 'R': 'ℛ', 'S': '𝒮', 'T': '𝒯', 'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 
+                        'Y': '𝒴', 'Z': '𝒵',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-boldscript': {
+                        'a': '𝓪', 'b': '𝓫', 'c': '𝓬', 'd': '𝓭', 'e': '𝓮', 'f': '𝓯', 'g': '𝓰', 'h': '𝓱', 
+                        'i': '𝓲', 'j': '𝓳', 'k': '𝓴', 'l': '𝓵', 'm': '𝓶', 'n': '𝓷', 'o': '𝓸', 'p': '𝓹', 
+                        'q': '𝓺', 'r': '𝓻', 's': '𝓼', 't': '𝓽', 'u': '𝓾', 'v': '𝓿', 'w': '𝔀', 'x': '𝔁', 
+                        'y': '𝔂', 'z': '𝔃', 
+                        'A': '𝓐', 'B': '𝓑', 'C': '𝓒', 'D': '𝓓', 'E': '𝓔', 'F': '𝓕', 'G': '𝓖', 'H': '𝓗', 
+                        'I': '𝓘', 'J': '𝓙', 'K': '𝓚', 'L': '𝓛', 'M': '𝓜', 'N': '𝓝', 'O': '𝓞', 'P': '𝓟', 
+                        'Q': '𝓠', 'R': '𝓡', 'S': '𝓢', 'T': '𝓣', 'U': '𝓤', 'V': '𝓥', 'W': '𝓦', 'X': '𝓧', 
+                        'Y': '𝓨', 'Z': '𝓩',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-upsidedown': {
+                        'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ', 'h': 'ɥ', 
+                        'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u', 'o': 'o', 'p': 'd', 
+                        'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n', 'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 
+                        'y': 'ʎ', 'z': 'z', 
+                        'A': '∀', 'B': '𐐒', 'C': 'Ↄ', 'D': '◖', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': '⅁', 'H': 'H', 
+                        'I': 'I', 'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N', 'O': 'O', 'P': 'Ԁ', 
+                        'Q': 'Ό', 'R': 'ᴚ', 'S': 'S', 'T': '⊥', 'U': '∩', 'V': 'Λ', 'W': 'M', 'X': 'X', 
+                        'Y': '⅄', 'Z': 'Z',
+                        '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', 
+                        '8': '8', '9': '6', '.': '˙', ',': '\'', '\'': ',', '"': ',,', '`': ',', 
+                        '?': '¿', '!': '¡', '&': '⅋', '_': '‾', '(': ')', ')': '(', '[': ']', ']': '[', 
+                        '{': '}', '}': '{', '<': '>', '>': '<', ' ': ' '
+                    },
+                    'fancy-bold': {
+                        'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 
+                        'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 
+                        'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 
+                        'y': '𝐲', 'z': '𝐳', 
+                        'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 
+                        'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 
+                        'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 
+                        'Y': '𝐘', 'Z': '𝐙',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-italic': {
+                        'a': '𝙖', 'b': '𝙗', 'c': '𝙘', 'd': '𝙙', 'e': '𝙚', 'f': '𝙛', 'g': '𝙜', 'h': '𝙝', 
+                        'i': '𝙞', 'j': '𝙟', 'k': '𝙠', 'l': '𝙡', 'm': '𝙢', 'n': '𝙣', 'o': '𝙤', 'p': '𝙥', 
+                        'q': '𝙦', 'r': '𝙧', 's': '𝙨', 't': '𝙩', 'u': '𝙪', 'v': '𝙫', 'w': '𝙬', 'x': '𝙭', 
+                        'y': '𝙮', 'z': '𝙯', 
+                        'A': '𝘼', 'B': '𝘽', 'C': '𝘾', 'D': '𝘿', 'E': '𝙀', 'F': '𝙁', 'G': '𝙂', 'H': '𝙃', 
+                        'I': '𝙄', 'J': '𝙅', 'K': '𝙆', 'L': '𝙇', 'M': '𝙈', 'N': '𝙉', 'O': '𝙊', 'P': '𝙋', 
+                        'Q': '𝙌', 'R': '𝙍', 'S': '𝙎', 'T': '𝙏', 'U': '𝙐', 'V': '𝙑', 'W': '𝙒', 'X': '𝙓', 
+                        'Y': '𝙔', 'Z': '𝙕',
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    },
+                    'fancy-superscript': {
+                        'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 'e': 'ᵉ', 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 
+                        'i': 'ⁱ', 'j': 'ʲ', 'k': 'ᵏ', 'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ', 'p': 'ᵖ', 
+                        'q': 'ᑫ', 'r': 'ʳ', 's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ', 'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 
+                        'y': 'ʸ', 'z': 'ᶻ', 
+                        ' ': ' ', '!': '!', '?': '?', '.': '.', ',': ','
+                    }
+                };
                 
                 const map = styleMaps[type];
                 if (!map) return text;
@@ -908,6 +689,84 @@
                 for (let char of text) {
                     result += map[char.toLowerCase()] || char;
                 }
+                return result;
+            }
+            
+            // Применение комбинирующих эффектов
+            function applyCombiningEffect(text, type) {
+                const effects = {
+                    strike: '\u0336',    // Combining Long Stroke Overlay
+                    slash: '\u0337',     // Combining Short Solidus Overlay
+                    underline: '\u035F', // Combining Double Macron Below
+                    double: '\u0347',    // Combining Equals Sign Below
+                    dotted: '\u0324',    // Combining Diaeresis Below
+                    wave: '\u0330',      // Combining Tilde Below
+                };
+                
+                const effectChar = effects[type] || '';
+                let result = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    result += text[i] + effectChar;
+                }
+                
+                return '<span class="combining-text">' + result + '</span>';
+            }
+            
+            // Генерирует текст с разделителями
+            function generateInvisibleDotsText(text) {
+                const separator = '\u0489'; // CYRILLIC MILLIONS SIGN (҉)
+                let result = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    result += text[i] + separator;
+                }
+                
+                return result;
+            }
+            
+            // Генерирует Zalgo текст
+            function generateZalgoText(text) {
+                const zalgoChars = [
+                    '\u0300', '\u0301', '\u0302', '\u0303', '\u0304', 
+                    '\u0305', '\u0306', '\u0307', '\u0308', '\u0309', 
+                    '\u030A', '\u030B', '\u030C', '\u030D', '\u030E', 
+                    '\u030F', '\u0310', '\u0311', '\u0312', '\u0313', 
+                    '\u0314', '\u0315', '\u031A', '\u031B', '\u0320', 
+                    '\u0321', '\u0322', '\u0323', '\u0324', '\u0325', 
+                    '\u0326', '\u0327', '\u0328', '\u0329', '\u032A', 
+                    '\u032B', '\u032C', '\u032D', '\u032E', '\u032F', 
+                    '\u0330', '\u0331', '\u0332', '\u0333', '\u0334', 
+                    '\u0335', '\u0336', '\u0337', '\u0338', '\u0339', 
+                    '\u033A', '\u033B', '\u033C', '\u033D', '\u033E', 
+                    '\u033F', '\u0340', '\u0341', '\u0342', '\u0343', 
+                    '\u0344', '\u0345', '\u0346', '\u0347', '\u0348', 
+                    '\u0349', '\u034A', '\u034B', '\u034C', '\u034D', 
+                    '\u034E', '\u034F', '\u0350', '\u0351', '\u0352', 
+                    '\u0353', '\u0354', '\u0355', '\u0356', '\u0357', 
+                    '\u0358', '\u0359', '\u035A', '\u035B', '\u035C', 
+                    '\u035D', '\u035E', '\u035F', '\u0360', '\u0361', 
+                    '\u0362', '\u0363', '\u0364', '\u0365', '\u0366', 
+                    '\u0367', '\u0368', '\u0369', '\u036A', '\u036B', 
+                    '\u036C', '\u036D', '\u036E', '\u036F'
+                ];
+                
+                let result = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    result += text[i];
+                    
+                    const topCount = Math.floor(Math.random() * 5) + 1;
+                    for (let j = 0; j < topCount; j++) {
+                        result += zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
+                    }
+                    
+                    const bottomCount = Math.floor(Math.random() * 3) + 1;
+                    for (let j = 0; j < bottomCount; j++) {
+                        result += zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
+                    }
+                }
+                
                 return result;
             }
             
@@ -920,7 +779,7 @@
                 }
                 
                 const result = generateText(text, selectedOption);
-                outputDisplay.textContent = result;
+                outputDisplay.innerHTML = result;
                 
                 // Анимация при генерации
                 outputDisplay.classList.remove('text-generated');
