@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор стилизованного текста</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Подключение всех необходимых шрифтов -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
@@ -101,7 +97,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
             letter-spacing: 1px;
-            font-weight: 700;
         }
         
         .subtitle {
@@ -400,22 +395,6 @@
             line-height: 1.8;
         }
         
-        .invisible-placeholder {
-            color: #718096;
-            font-style: italic;
-            position: relative;
-        }
-        
-        .invisible-placeholder::after {
-            content: "[Невидимый текст]";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: #718096;
-        }
-        
         .outline-text {
             color: transparent;
             -webkit-text-stroke: 1px #9f7aea;
@@ -429,7 +408,6 @@
         
         /* Обновленные стили для текста */
         .bubble {
-            font-family: Arial, sans-serif;
             font-weight: bold;
             letter-spacing: 1px;
             color: #6a11cb;
@@ -437,7 +415,6 @@
         }
         
         .square {
-            font-family: Arial, sans-serif;
             font-weight: bold;
             letter-spacing: 1px;
             color: #4a5568;
@@ -445,22 +422,22 @@
         }
         
         .invisible-dots {
-            font-family: Arial, sans-serif;
             color: #9f7aea;
             letter-spacing: 1px;
         }
         
         .script {
-            font-family: 'Caveat', cursive;
+            font-family: cursive;
             color: #38ef7d;
             font-size: 1.6rem;
             font-weight: bold;
         }
         
         .old-english {
-            font-family: 'MedievalSharp', 'Times New Roman', serif;
+            font-family: 'Times New Roman', Times, serif;
             font-weight: bold;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .upside-down {
@@ -545,7 +522,7 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-wand-magic-sparkles floating floating-1"></i> Генератор стилизованного текста</h1>
-            <div class="subtitle">Преобразуйте ваш текст в 18 различных стилей. Просто введите текст, выберите стиль и нажмите "Сгенерировать"</div>
+            <div class="subtitle">Преобразуйте ваш текст в 16 различных стилей. Просто введите текст, выберите стиль и нажмите "Сгенерировать"</div>
         </header>
         
         <div class="main-content">
@@ -585,10 +562,6 @@
                         <div class="option" data-type="zalgo">
                             <div class="option-title">Zalgo</div>
                             <div class="option-preview zalgo">Z̷͇͑a̵̡͝l̶̳͝ǵ̶͕o̷̘̿</div>
-                        </div>
-                        <div class="option" data-type="invisible">
-                            <div class="option-title">Невидимые чернила</div>
-                            <div class="option-preview invisible-placeholder">[невидимый текст]</div>
                         </div>
                         <div class="option" data-type="invisible-dots">
                             <div class="option-title">Текст с разделителями</div>
@@ -632,10 +605,6 @@
                             <div class="option-title">Курсив</div>
                             <div class="option-preview italic-text">Italic</div>
                         </div>
-                        <div class="option" data-type="serif">
-                            <div class="option-title">С засечками</div>
-                            <div class="option-preview serif-text">Serif</div>
-                        </div>
                         <div class="option" data-type="sansSerif">
                             <div class="option-title">Без засечек</div>
                             <div class="option-preview sans-serif-text">Sans-Serif</div>
@@ -647,10 +616,6 @@
                         <div class="option" data-type="upsideDown">
                             <div class="option-title">Вверх ногами</div>
                             <div class="option-preview"><span class="upside-down">ɐqɯop</span></div>
-                        </div>
-                        <div class="option" data-type="superscript">
-                            <div class="option-title">Надстрочный</div>
-                            <div class="option-preview">Sᵘᵖᵉʳˢᶜʳᶦᵖᵗ</div>
                         </div>
                     </div>
                 </div>
@@ -674,7 +639,7 @@
             </div>
             
             <div class="info-text">
-                <p><i class="fas fa-lightbulb"></i> Советы: Невидимый текст можно вставить в мессенджеры. Для просмотра выделите текст. Для стилей "Вверх ногами" и "Zalgo" может потребоваться специальный шрифт.</p>
+                <p><i class="fas fa-lightbulb"></i> Советы: Для стилей "Вверх ногами" и "Zalgo" может потребоваться специальный шрифт.</p>
             </div>
         </div>
     </div>
@@ -713,8 +678,6 @@
                 switch(type) {
                     case 'zalgo':
                         return '<span class="zalgo">' + generateZalgoText(text) + '</span>';
-                    case 'invisible':
-                        return '<span class="invisible-placeholder">' + generateInvisibleText(text) + '</span>';
                     case 'outline':
                         return '<span class="outline-text">' + text + '</span>';
                     case 'smallCaps':
@@ -731,16 +694,12 @@
                         return '<span class="bold-text">' + text + '</span>';
                     case 'italic':
                         return '<span class="italic-text">' + text + '</span>';
-                    case 'serif':
-                        return '<span class="serif-text">' + text + '</span>';
                     case 'sansSerif':
                         return '<span class="sans-serif-text">' + text + '</span>';
                     case 'oldEnglish':
                         return '<span class="old-english">' + text + '</span>';
                     case 'upsideDown':
                         return '<span class="upside-down">' + generateUpsideDownText(text) + '</span>';
-                    case 'superscript':
-                        return '<span class="superscript">' + generateSuperscriptText(text) + '</span>';
                     default:
                         return applyBaseEffect(text, type);
                 }
@@ -909,25 +868,6 @@
             }
             
             /**
-             * Генерирует невидимый текст
-             */
-            function generateInvisibleText(text) {
-                const invisibleChars = ['\u200B', '\u200C', '\u200D', '\u2060', '\uFEFF'];
-                let result = '';
-                
-                for (let i = 0; i < text.length; i++) {
-                    if (text[i] === ' ') {
-                        result += ' ';
-                    } else {
-                        const randomIndex = Math.floor(Math.random() * invisibleChars.length);
-                        result += invisibleChars[randomIndex];
-                    }
-                }
-                
-                return result;
-            }
-            
-            /**
              * Генерирует текст вверх ногами
              */
             function generateUpsideDownText(text) {
@@ -950,32 +890,6 @@
                 for (let i = text.length - 1; i >= 0; i--) {
                     const char = text[i];
                     result += charMap[char] || char;
-                }
-                
-                return result;
-            }
-            
-            /**
-             * Генерирует надстрочный текст
-             */
-            function generateSuperscriptText(text) {
-                const superscriptMap = {
-                    '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', 
-                    '7': '⁷', '8': '⁸', '9': '⁹', 'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 
-                    'e': 'ᵉ', 'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 'i': 'ⁱ', 'j': 'ʲ', 'k': 'ᵏ', 
-                    'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ', 'p': 'ᵖ', 'q': '۹', 'r': 'ʳ', 
-                    's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ', 'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 'y': 'ʸ', 
-                    'z': 'ᶻ', 'A': 'ᴬ', 'B': 'ᴮ', 'C': 'ᶜ', 'D': 'ᴰ', 'E': 'ᴱ', 'F': 'ᶠ', 
-                    'G': 'ᴳ', 'H': 'ᴴ', 'I': 'ᴵ', 'J': 'ᴶ', 'K': 'ᴷ', 'L': 'ᴸ', 'M': 'ᴹ', 
-                    'N': 'ᴺ', 'O': 'ᴼ', 'P': 'ᴾ', 'Q': 'Q', 'R': 'ᴿ', 'S': 'ˢ', 'T': 'ᵀ', 
-                    'U': 'ᵁ', 'V': 'ⱽ', 'W': 'ᵂ', 'X': 'ˣ', 'Y': 'ʸ', 'Z': 'ᶻ', '+': '⁺', 
-                    '-': '⁻', '=': '⁼', '(': '⁽', ')': '⁾'
-                };
-                
-                let result = '';
-                for (let i = 0; i < text.length; i++) {
-                    const char = text[i];
-                    result += superscriptMap[char] || char;
                 }
                 
                 return result;
@@ -1004,19 +918,11 @@
                 } else {
                     outputDisplay.classList.remove('zalgo');
                 }
-                
-                // Плейсхолдер для невидимого текста
-                if (selectedOption === 'invisible') {
-                    outputDisplay.classList.add('invisible-placeholder');
-                    outputDisplay.innerHTML = result || ' ';
-                } else {
-                    outputDisplay.classList.remove('invisible-placeholder');
-                }
             });
             
             // Обработчик кнопки копирования
             copyBtn.addEventListener('click', function() {
-                if (!outputDisplay.textContent.trim() && selectedOption !== 'invisible') return;
+                if (!outputDisplay.textContent.trim()) return;
                 
                 const range = document.createRange();
                 range.selectNode(outputDisplay);
