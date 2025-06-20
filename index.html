@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Стилизованный текст</title>
-    <link rel="icon" href="Icon.png">
+    <title>Генератор стилизованного текста</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -23,25 +22,14 @@
             padding: 20px;
             color: #fff;
             overflow-x: hidden;
-        }
-        
-        /* Анимация фона */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        body {
-            background: linear-gradient(-45deg, #1a0a2e, #2d0a50, #4a1b6d, #6a11cb);
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
         
-        /* Анимация появления контейнера */
-        @keyframes containerAppear {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .container {
@@ -58,7 +46,11 @@
             opacity: 0;
         }
         
-        /* Анимация появления заголовка */
+        @keyframes containerAppear {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
         @keyframes titleAppear {
             0% { transform: translateY(-30px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
@@ -109,7 +101,6 @@
             line-height: 1.6;
         }
         
-        /* Анимация появления контента */
         @keyframes contentAppear {
             0% { transform: translateY(30px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
@@ -167,6 +158,7 @@
             font-size: 1.3rem;
             line-height: 1.8;
             padding: 20px;
+            font-family: "Segoe UI", "Arial Unicode MS", "Segoe UI Symbol", Tahoma, Geneva, Verdana, sans-serif;
         }
         
         @keyframes glow {
@@ -216,7 +208,6 @@
             gap: 15px;
         }
         
-        /* Анимация опций */
         .option {
             background: rgba(45, 55, 85, 0.7);
             border: 2px solid #4a5568;
@@ -394,37 +385,43 @@
         .zalgo {
             letter-spacing: 1px;
             line-height: 1.8;
+            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
         }
         
         .outline-text {
             color: transparent;
             -webkit-text-stroke: 1px #9f7aea;
             text-stroke: 1px #9f7aea;
+            font-size: 1.4rem;
         }
         
         .small-caps {
             font-variant: small-caps;
             letter-spacing: 1px;
+            font-size: 1.5rem;
         }
         
-        /* Обновленные стили для текста */
         .bubble {
             font-weight: bold;
             letter-spacing: 1px;
             color: #6a11cb;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
+            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
         }
         
         .square {
             font-weight: bold;
             letter-spacing: 1px;
             color: #4a5568;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
         }
         
         .invisible-dots {
             color: #9f7aea;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            font-size: 1.4rem;
+            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
         }
         
         .script {
@@ -444,12 +441,7 @@
         .upside-down {
             display: inline-block;
             transform: rotate(180deg);
-        }
-        
-        .superscript {
-            vertical-align: super;
-            font-size: 0.8em;
-            font-family: inherit;
+            font-family: "Arial Unicode MS", "Segoe UI Symbol", sans-serif;
         }
         
         .bold-text {
@@ -640,7 +632,7 @@
             </div>
             
             <div class="info-text">
-                <p><i class="fas fa-lightbulb"></i> Советы: Для стилей "Вверх ногами" и "Zalgo" может потребоваться специальный шрифт.</p>
+                <p><i class="fas fa-lightbulb"></i> Советы: Для стилей "Вверх ногами" и "Zalgo" может потребоваться специальный шрифт. Если текст отображается некорректно, попробуйте другой шрифт.</p>
             </div>
         </div>
     </div>
@@ -815,7 +807,10 @@
                 let result = '';
                 
                 for (let i = 0; i < text.length; i++) {
-                    result += text[i] + separator;
+                    result += text[i];
+                    if (i < text.length - 1) {
+                        result += separator;
+                    }
                 }
                 
                 return result;
