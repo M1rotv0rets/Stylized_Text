@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Генератор стилизованного текста</title>
+    <title>Стилизованный текст</title>
+    <link rel="icon" href="Icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -570,7 +571,7 @@
                         'I': '🅘', 'J': '🅙', 'K': '🅚', 'L': '🅛', 'M': '🅜', 'N': '🅝', 'O': '🅞', 'P': '🅟', 
                         'Q': '🅠', 'R': '🅡', 'S': '🅢', 'T': '🅣', 'U': '🅤', 'V': '🅥', 'W': '🅦', 'X': '🅧', 
                         'Y': '🅨', 'Z': '🅩',
-                        ' ': ' ', '!': '❗', '?': '❓', '.': '⭑', ',': ','
+                        ' ': ' ', '!': '!', '?': '?', '.': '⭑', ',': ','
                     },
                     'fancy-square': {
                         'а': '🄰', 'б': '🄱', 'в': '🄲', 'г': '🄳', 'д': '🄴', 'е': '🄵', 'ё': '🄶', 'ж': '🄷', 
@@ -767,12 +768,12 @@
             // Применение комбинирующих эффектов
             function applyCombiningEffect(text, type) {
                 const effects = {
-                    strike: '\u0336',    // Combining Long Stroke Overlay
-                    slash: '\u0337',     // Combining Short Solidus Overlay
-                    underline: '\u035F', // Combining Double Macron Below
-                    double: '\u0347',    // Combining Equals Sign Below
-                    dotted: '\u0324',    // Combining Diaeresis Below
-                    wave: '\u0330',      // Combining Tilde Below
+                    strike: '\u0336',   
+                    slash: '\u0337',    
+                    underline: '\u035F', 
+                    double: '\u0347',    
+                    dotted: '\u0324',   
+                    wave: '\u0330',      
                 };
                 
                 const effectChar = effects[type] || '';
